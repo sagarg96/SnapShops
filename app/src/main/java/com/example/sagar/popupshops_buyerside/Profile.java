@@ -25,6 +25,15 @@ public class Profile {
     @Expose
     private String location;
 
+    public Profile() {}
+
+    public Profile(String name, Integer price, String location, String imageUrl) {
+        this.name = name;
+        this.price = price;
+        this.location = location;
+        this.imageUrl = imageUrl;
+    }
+
     public String getName() {
         return name;
     }
