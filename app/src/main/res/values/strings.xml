@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PopUpShops_BuyerSide</string>
+    <string name="buyer">buyer</string>
+    <string name="vendor">vendor</string>
 </resources>

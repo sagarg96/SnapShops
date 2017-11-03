@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "914302477347",
+    "firebase_url": "https://popupshops-e4627.firebaseio.com",
+    "project_id": "popupshops-e4627",
+    "storage_bucket": "popupshops-e4627.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914302477347:android:42cd1298622a9ccb",
+        "android_client_info": {
+          "package_name": "com.example.sagar.popupshops_buyerside"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914302477347-0vgbuclpn721ior18a19qqoo2bu5pd26.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sagar.popupshops_buyerside",
+            "certificate_hash": "b7a64180b0231f4e3880b98ecbd2a60f3c638696"
+          }
+        },
+        {
+          "client_id": "914302477347-4qdhb789e4i38eamc663tdnv0225ht34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcD5Ty2ySBhnkuHOCMHmJukb2XdJ7AIms"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914302477347-4qdhb789e4i38eamc663tdnv0225ht34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
