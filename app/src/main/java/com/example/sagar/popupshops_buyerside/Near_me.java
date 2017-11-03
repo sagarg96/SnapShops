@@ -12,7 +12,7 @@ import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 
-public class Near_me extends AppCompatActivity {
+public class Near_me extends LoginActivity {
 
     private SwipePlaceHolderView mSwipeView;
     private Context mContext;

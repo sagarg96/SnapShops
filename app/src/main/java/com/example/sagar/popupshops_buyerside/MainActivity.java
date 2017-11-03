@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends LoginActivity {
 
     private SwipePlaceHolderView mSwipeView;
     private Context mContext;

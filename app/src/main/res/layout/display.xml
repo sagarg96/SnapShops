@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+    <android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:id="@+id/cv"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/person_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="16dp" />
+
+        <TextView
+            android:id="@+id/person_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/person_photo"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/person_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/person_name"
+            android:layout_toRightOf="@+id/person_photo" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:backgroundTint="#FF0000"
+            android:clickable="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignBottom="@+id/person_age"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
+
+  <!--  <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:backgroundTint="#FF4"
+        android:clickable="true"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="18dp" />
+-->
