@@ -23,7 +23,7 @@
         android:text="Add Item "
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="33dp"
         app:layout_constraintTop_toBottomOf="@+id/lis" />
 
     <Button
@@ -35,5 +35,12 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="35dp"
         app:layout_constraintTop_toBottomOf="@+id/ad" />
+
+    <EditText
+        android:id="@+id/editer"
+        android:layout_width="322dp"
+        android:layout_height="110dp"
+        android:hint="Put Your Shop Info Here"
+        android:inputType="text"/>" />
 
 </android.support.constraint.ConstraintLayout>
