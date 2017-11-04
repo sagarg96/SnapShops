@@ -8,11 +8,11 @@
         style="@android:style/Widget.Holo.ImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="133dp"
         android:adjustViewBounds="false"
         android:scaleX="2."
         android:scaleY="2"
         app:srcCompat="@mipmap/ic_launcher"
+        android:layout_marginTop="53dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -20,18 +20,61 @@
         android:id="@+id/attachButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton1"
+        android:text="Attach Image"
         android:layout_below="@+id/imageButton1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="56dp"
-        android:text="Attach Image" />
+        android:layout_marginTop="45dp" />
 
     <Button
         android:id="@+id/uploadButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/attachButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"
-        android:text="upload" />
+        app:layout_constraintTop_toBottomOf="@+id/attachButton"
+        android:text="upload"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/nameInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="name"
+        android:inputType="textPersonName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uploadButton"
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/uploadButton"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/priceInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="price"
+        android:inputType="numberDecimal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameInput"
+        android:layout_below="@+id/nameInput"
+        android:layout_alignLeft="@+id/nameInput"
+        android:layout_alignStart="@+id/nameInput"
+        android:layout_marginTop="17dp" />
+
+    <!--<EditText-->
+        <!--android:id="@+id/imageUrlInput"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:ems="10"-->
+        <!--android:hint="imageUrl"-->
+        <!--android:inputType="textPersonName"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/priceInput"-->
+        <!--android:layout_marginBottom="48dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignLeft="@+id/priceInput"-->
+        <!--android:layout_alignStart="@+id/priceInput" />-->
+
 
 </RelativeLayout>

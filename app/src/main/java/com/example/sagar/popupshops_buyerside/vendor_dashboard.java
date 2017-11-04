@@ -60,7 +60,7 @@ import android.widget.Toast;
 
                 if (KeyCode == KeyEvent.KEYCODE_ENTER)
                 {
-                    Toast.makeText(vendor_dashboard.this,"Description Updated" + the_text,Toast.LENGTH_LONG);
+                    Toast.makeText(vendor_dashboard.this,"Description Updated" + the_text,Toast.LENGTH_LONG).show();
                 }
                 return false;
             }
@@ -76,7 +76,7 @@ import android.widget.Toast;
 
                 if (KeyCode == KeyEvent.KEYCODE_ENTER)
                 {
-                    Toast.makeText(vendor_dashboard.this,"Title Updated" + the_text,Toast.LENGTH_LONG);
+                    Toast.makeText(vendor_dashboard.this,"Title Updated" + the_text,Toast.LENGTH_LONG).show();
                 }
                 return false;
             }
