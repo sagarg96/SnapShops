@@ -17,20 +17,29 @@ import android.widget.Button;
             super.onCreate(savedInstanceState);
             setContentView(R.layout.view);
 
-            Button buyerButton = (Button)findViewById(R.id.buyer_button);
-            Button vendorButton = (Button)findViewById(R.id.vendor_button);
+            Button listview = (Button)findViewById(R.id.lis);
+            Button addtolist = (Button)findViewById(R.id.ad);
+            final Button locate = (Button)findViewById(R.id.loc);
 
-            buyerButton.setOnClickListener(new Button.OnClickListener(){
+            listview.setOnClickListener(new Button.OnClickListener(){
                 public void onClick(View view){
                     Intent intent = new Intent(com.example.sagar.popupshops_buyerside.view.this, recycle.class);
                     startActivity(intent);
                 }
             });
 
-            vendorButton.setOnClickListener(new Button.OnClickListener(){
+            addtolist.setOnClickListener(new Button.OnClickListener(){
                 public void onClick(View view){
                     Intent intent = new Intent(com.example.sagar.popupshops_buyerside.view.this, add.class);
                     startActivity(intent);
+                }
+            });
+
+            locate.setOnClickListener(new Button.OnClickListener(){
+                public void onClick(View view) {
+                    if (view.getId() == R.id.loc) {
+                        locate.setText("Location Updated");
+                    }
                 }
             });
         }

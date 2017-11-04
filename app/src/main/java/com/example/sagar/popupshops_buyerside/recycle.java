@@ -36,9 +36,9 @@ public class recycle extends view {
 
     private void initializeData(){
         lists = new ArrayList<>();
-        lists.add(new list("1200", "store 1", R.drawable.alpha));
-        lists.add(new list("600", "store 2", R.drawable.alpha));
-        lists.add(new list("200", "store 2", R.drawable.alpha));
+        lists.add(new list("1200", "store 1", R.drawable.ic_cancel));
+        lists.add(new list("600", "store 2", R.drawable.ic_cancel));
+        lists.add(new list("200", "store 2", R.drawable.ic_heart));
 
         //connect to DB
     }
