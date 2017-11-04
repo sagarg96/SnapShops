@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
         vendorButton.setOnClickListener(new Button.OnClickListener(){
             public void onClick(View view){
-                Intent intent = new Intent(LoginActivity.this, view.class);
+                Intent intent = new Intent(LoginActivity.this, vendor_dashboard.class);
                 startActivity(intent);
             }
         });

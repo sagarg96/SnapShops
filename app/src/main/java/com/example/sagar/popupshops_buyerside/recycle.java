@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class recycle extends view {
+public class recycle extends vendor_dashboard {
 
     private List<list> lists;
     private RecyclerView rv;

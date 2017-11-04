@@ -25,9 +25,8 @@
         <activity android:name=".Near_me" />
         <activity android:name=".VendorActivity"></activity>
         <activity android:name=".add" />
-        <activity android:name=".display" />
         <activity android:name=".recycle"></activity>
-        <activity android:name=".view"></activity>
+        <activity android:name=".vendor_dashboard"></activity>
 
         <uses-feature android:name="android.hardware.camera"
             android:required="true" />

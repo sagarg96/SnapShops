@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.sagar.popupshops_buyerside.view">
+    tools:context="com.example.sagar.popupshops_buyerside.vendor_dashboard">
 
     <Button
         android:id="@+id/lis"
@@ -13,8 +13,9 @@
         android:text="View Current Items"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="264dp" />
+        app:layout_constraintTop_toBottomOf="@+id/editer"
+        app:layout_constraintHorizontal_bias="0.502"
+        android:layout_marginTop="42dp" />
 
     <Button
         android:id="@+id/ad"
@@ -23,8 +24,9 @@
         android:text="Add Item "
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="33dp"
-        app:layout_constraintTop_toBottomOf="@+id/lis" />
+        app:layout_constraintTop_toBottomOf="@+id/lis"
+        android:layout_marginTop="30dp"
+        app:layout_constraintHorizontal_bias="0.501" />
 
     <Button
         android:id="@+id/loc"
@@ -33,14 +35,28 @@
         android:text="Update Location"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintTop_toBottomOf="@+id/ad" />
 
     <EditText
         android:id="@+id/editer"
         android:layout_width="322dp"
         android:layout_height="110dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shop_name"
         android:hint="Put Your Shop Info Here"
-        android:inputType="text"/>" />
+        android:inputType="text"
+        android:layout_marginTop="44dp" />" />
+    <EditText
+        android:id="@+id/shop_name"
+        android:layout_width="322dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:hint="Shop Name"
+        android:inputType="text"
+        android:layout_marginTop="35dp" />" />
 
 </android.support.constraint.ConstraintLayout>
