@@ -14,24 +14,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".Registration.LoginActivity"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".Near_me" />
         <activity android:name=".VendorActivity" />
-        <activity android:name=".add" />
+        <activity android:name=".Shop.add" />
         <activity android:name=".recycle"></activity>
-        <activity android:name=".vendor_dashboard"></activity>
+        <activity android:name=".Shop.vendor_dashboard"></activity>
         <!--<activity android:name=".display" />-->
 
 
-        <activity android:name=".LaunchActivity">
+        <activity android:name=".Registration.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignupActivity" />
+        <activity android:name=".Registration.SignupActivity" />
         <activity android:name=".SelectActionActivity"></activity>
     </application>
 

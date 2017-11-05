@@ -1,4 +1,4 @@
-package com.example.sagar.popupshops_buyerside;
+package com.example.sagar.popupshops_buyerside.Registration;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +10,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.sagar.popupshops_buyerside.R;
+import com.example.sagar.popupshops_buyerside.SelectActionActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -24,6 +28,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText userName;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     @Override
     public void onStart() {
@@ -48,6 +53,7 @@ public class SignupActivity extends AppCompatActivity {
         signUpSubmit = (Button) findViewById(R.id.signUpSubmit);
 
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         signUpSubmit.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -57,7 +63,7 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
-    public void createAccount(String email, String password) {
+    public void createAccount(final String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -65,6 +71,8 @@ public class SignupActivity extends AppCompatActivity {
                         Log.d("here3", "createUserWithEmail:onComplete:" + task.isSuccessful());
 
                         if (task.isSuccessful()) {
+                            createNewUser();
+
                             Intent intent = new Intent(SignupActivity.this, SelectActionActivity.class);
                             startActivity(intent);
                         }
@@ -80,5 +88,10 @@ public class SignupActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+    }
+
+    private void createNewUser() {
+        User newUser = new User(userName.getText().toString(), email.getText().toString());
+        mDatabase.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(newUser);
     }
 }

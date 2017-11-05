@@ -1,4 +1,4 @@
-package com.example.sagar.popupshops_buyerside;
+package com.example.sagar.popupshops_buyerside.Shop;
 
 
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.sagar.popupshops_buyerside.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

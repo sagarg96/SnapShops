@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.sagar.popupshops_buyerside.SignupActivity">
+    tools:context="com.example.sagar.popupshops_buyerside.Registration.SignupActivity">
 
     <TextView
         android:id="@+id/textView3"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="28dp"
         android:layout_marginStart="28dp"
-        android:text="Name"
+        android:text="User Name"
         app:layout_constraintBottom_toBottomOf="@+id/userName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/userName"
@@ -82,7 +82,6 @@
         android:layout_marginTop="38dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="User Name"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintRight_creator="1"
