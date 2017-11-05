@@ -1,10 +1,15 @@
 package com.example.sagar.popupshops_buyerside.Shop;
 
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -52,15 +57,30 @@ public class add extends vendor_dashboard {
             }
         });
 
+        AutoCompleteTextView categoryinput = (AutoCompleteTextView) findViewById(R.id.categoryinput) ;
+        categoryinput.setAdapter(suggest(this));
+
     }
 
 
-    private void dispatchTakePicetureIntent() {
+    private void dispatchTakePicetureIntent()
+    {
         Intent takePicIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePicIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePicIntent, reqst_img);
         }
 
+    }
+
+    private ArrayAdapter<String> suggest(Context context)
+    {
+        String[]suggestions = {"General","Bags","Books"};
+        String[]addresses = new String[suggestions.length];
+        for(int i =0;i<suggestions.length;i++)
+        {
+            addresses[i]=suggestions[i];
+        }
+        return new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, addresses);
     }
 }
 
