@@ -142,10 +142,13 @@ public class add extends vendor_dashboard {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
+        ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton1);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
             imageUrl = data.getData();
+            imageButton.setImageURI(imageUrl);
         }
         else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            imageButton.setImageURI(imageUrl);
         }
     }
 

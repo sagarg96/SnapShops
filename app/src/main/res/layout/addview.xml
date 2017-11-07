@@ -79,19 +79,4 @@
         android:layout_alignLeft="@+id/priceInput"
         android:layout_alignStart="@+id/priceInput" />
 
-    <!--<EditText-->
-        <!--android:id="@+id/imageUrlInput"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:ems="10"-->
-        <!--android:hint="imageUrl"-->
-        <!--android:inputType="textPersonName"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/priceInput"-->
-        <!--android:layout_marginBottom="48dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignLeft="@+id/priceInput"-->
-        <!--android:layout_alignStart="@+id/priceInput" />-->
-
-
 </RelativeLayout>
