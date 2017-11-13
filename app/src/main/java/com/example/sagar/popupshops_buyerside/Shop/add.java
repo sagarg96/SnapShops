@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,10 +25,16 @@ import com.example.sagar.popupshops_buyerside.R;
 import com.example.sagar.popupshops_buyerside.Registration.LaunchActivity;
 import com.example.sagar.popupshops_buyerside.SelectActionActivity;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
+import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
+import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -52,8 +59,9 @@ public class add extends AppCompatActivity {
         setContentView(R.layout.addview);
 
         final ImageButton imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
-        final EditText nameInput = (EditText) findViewById(R.id.nameInput);
+        final EditText descriptionInput = (EditText) findViewById(R.id.nameInput);
         final EditText priceInput = (EditText) findViewById(R.id.priceInput);
+        final EditText stockInput = (EditText) findViewById(R.id.itemStockInput);
         final Button attachButton = (Button) findViewById(R.id.attachButton);
         final Button upload = (Button) findViewById(R.id.uploadButton);
 
@@ -77,12 +85,13 @@ public class add extends AppCompatActivity {
 
         upload.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
-                final String name = nameInput.getText().toString();
+                final String description = descriptionInput.getText().toString();
                 final String priceString = priceInput.getText().toString();
                 final String categoryString = categoryInput.getText().toString();
+                final String stockString = stockInput.getText().toString();
                 final DatabaseReference dbRef = database.getReference("item").push();
 
-                if (priceString.length() != 0 && name.length() != 0 && categoryString.length() != 0 && imageUrl != null) {
+                if (priceString.length() != 0 && description.length() != 0 && categoryString.length() != 0 && imageUrl != null) {
                     String itemID = dbRef.getKey();
                     storageRef.child("images/" + itemID + ".png").putFile(imageUrl)
                             .addOnFailureListener(new OnFailureListener() {
@@ -95,10 +104,36 @@ public class add extends AppCompatActivity {
                                                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                                             dbRef.setValue(
                                                                     new Item(
-                                                                            categoryString, Integer.parseInt(priceString), null, taskSnapshot.getMetadata().getDownloadUrl().toString(), 1
+                                                                            categoryString, Integer.parseInt(priceString), description, taskSnapshot.getMetadata().getDownloadUrl().toString(), Integer.parseInt(stockString)
                                                                     )
                                                             );
+                                                            //add shop id to item record
+                                                            Query shopIDQuery = FirebaseUtils.getUsersRef().child(FirebaseUtils.getCurrentUser().getUid()).child(FirebaseEndpoint.USERS.SHOPS);
+                                                            shopIDQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                    boolean notDone = true;
+                                                                    if (dataSnapshot.exists()) {
+                                                                        if (notDone) {
+                                                                            String val = dataSnapshot.getValue().toString();
+                                                                            dbRef.child(FirebaseEndpoint.ITEMS.SHOPID).setValue(val.substring(1, val.length() - 1));
+                                                                            notDone = false;
+                                                                        }
+
+
+                                                                    }
+                                                                }
+
+                                                                @Override
+                                                                public void onCancelled(DatabaseError databaseError) {
+                                                                    // Getting Post failed, log a message
+                                                                    Log.w("here", "loadPost:onCancelled", databaseError.toException());
+                                                                    // ...
+
+                                                                }
+                                                            });
                                                             Toast.makeText(add.this, "Item successfully uploaded", Toast.LENGTH_LONG).show();
+
                                                         }
                                                     }
                     );
@@ -157,7 +192,7 @@ public class add extends AppCompatActivity {
     }
 
     private ArrayAdapter<String> suggest(Context context) {
-        String[] suggestions = {"General", "Bags", "Books"};
+        String[] suggestions = {"General", "Bags", "Books", "back"};
         String[] addresses = new String[suggestions.length];
         for (int i = 0; i < suggestions.length; i++) {
             addresses[i] = suggestions[i];
