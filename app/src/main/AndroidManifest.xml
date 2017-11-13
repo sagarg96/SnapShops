@@ -16,7 +16,6 @@
         <activity android:name=".Registration.LoginActivity"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".Near_me" />
-        <activity android:name=".VendorActivity" />
         <activity android:name=".Shop.add" />
         <activity android:name=".recycle"></activity>
         <activity android:name=".Shop.vendor_dashboard"></activity>
