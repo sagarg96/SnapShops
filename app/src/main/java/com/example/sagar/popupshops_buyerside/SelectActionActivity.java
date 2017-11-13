@@ -55,15 +55,14 @@ public class SelectActionActivity extends AppCompatActivity {
         buyButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkShopExists(FirebaseAuth.getInstance().getCurrentUser());
+
             }
         });
 
         sellButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SelectActionActivity.this, vendor_dashboard.class);
-                startActivity(intent);
+                checkShopExists(FirebaseUtils.getCurrentUser());
             }
         });
 
@@ -79,7 +78,7 @@ public class SelectActionActivity extends AppCompatActivity {
                     //if shop exists go to shop dashboard
                     Log.w("here", "shop exists");
                     Intent intent = new Intent(SelectActionActivity.this, vendor_dashboard.class);
-                    intent.putExtra("setup", "false");
+                    intent.putExtra("setup", false);
                     startActivity(intent);
                 } else {
                     //if shop doesnt exist take ask for shop setup with an alert dialog
@@ -89,7 +88,7 @@ public class SelectActionActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     Intent intent = new Intent(SelectActionActivity.this, vendor_dashboard.class);
-                                    intent.putExtra("setup", "true");
+                                    intent.putExtra("setup", true);
                                     startActivity(intent);
                                 }
                             })

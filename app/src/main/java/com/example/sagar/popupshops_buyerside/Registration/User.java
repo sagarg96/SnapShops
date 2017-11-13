@@ -6,7 +6,7 @@ public class User {
 
     private String email;
     private String userName;
-    private ArrayList<Integer> shops;
+    private ArrayList<String> shops;
 
     public User() {
 
@@ -18,11 +18,11 @@ public class User {
         this.shops = new ArrayList<>();
     }
 
-    public ArrayList<Integer> getShops() {
+    public ArrayList<String> getShops() {
         return shops;
     }
 
-    public void addShop(int newShopID) {
+    public void addShop(String newShopID) {
         shops.add(newShopID);
     }
 
