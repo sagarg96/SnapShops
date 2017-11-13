@@ -56,6 +56,7 @@ public class add extends AppCompatActivity {
         final ImageButton imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
         final EditText descriptionInput = (EditText) findViewById(R.id.nameInput);
         final EditText priceInput = (EditText) findViewById(R.id.priceInput);
+        final EditText stockInput = (EditText) findViewById(R.id.itemStockInput);
         final Button attachButton = (Button) findViewById(R.id.attachButton);
         final Button upload = (Button) findViewById(R.id.uploadButton);
 
@@ -82,6 +83,7 @@ public class add extends AppCompatActivity {
                 final String description = descriptionInput.getText().toString();
                 final String priceString = priceInput.getText().toString();
                 final String categoryString = categoryInput.getText().toString();
+                final String stockString = stockInput.getText().toString();
                 final DatabaseReference dbRef = database.getReference("item").push();
 
                 if (priceString.length() != 0 && description.length() != 0 && categoryString.length() != 0 && imageUrl != null) {
@@ -97,7 +99,7 @@ public class add extends AppCompatActivity {
                                                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                                             dbRef.setValue(
                                                                     new Item(
-                                                                            categoryString, Integer.parseInt(priceString), description, taskSnapshot.getMetadata().getDownloadUrl().toString(), 1
+                                                                            categoryString, Integer.parseInt(priceString), description, taskSnapshot.getMetadata().getDownloadUrl().toString(), Integer.parseInt(stockString)
                                                                     )
                                                             );
                                                             //add shop id to item record
@@ -185,7 +187,7 @@ public class add extends AppCompatActivity {
     }
 
     private ArrayAdapter<String> suggest(Context context) {
-        String[] suggestions = {"General", "Bags", "Books"};
+        String[] suggestions = {"General", "Bags", "Books", "back"};
         String[] addresses = new String[suggestions.length];
         for (int i = 0; i < suggestions.length; i++) {
             addresses[i] = suggestions[i];

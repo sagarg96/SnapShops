@@ -35,6 +35,9 @@ public class vendor_dashboard extends AppCompatActivity {
     String id;
     EditText shopDescription;
     EditText shopName;
+    LinearLayout setUpLayout;
+    LinearLayout dashboardLayout;
+    boolean isSetup;
 
     @Override
     public void onStart() {
@@ -48,21 +51,14 @@ public class vendor_dashboard extends AppCompatActivity {
         setContentView(R.layout.vendor_dashboard);
 
         Bundle extras = getIntent().getExtras();
-        boolean isSetup = extras.getBoolean("setup");
+        isSetup = extras.getBoolean("setup");
 
         id = FirebaseUtils.getCurrentUser().getUid();
 
-        LinearLayout setUpLayout = (LinearLayout) findViewById(R.id.setupLayout);
-        LinearLayout dashboardLayout = (LinearLayout) findViewById(R.id.dashboardLayout);
+        setUpLayout = (LinearLayout) findViewById(R.id.setupLayout);
+        dashboardLayout = (LinearLayout) findViewById(R.id.dashboardLayout);
 
-        if (isSetup) {
-            setUpLayout.setVisibility(View.VISIBLE);
-            dashboardLayout.setVisibility(View.GONE);
-        } else {
-            setUpLayout.setVisibility(View.GONE);
-            setUpLayout.setVisibility(View.VISIBLE);
-            populateFields();
-        }
+        setUpUI(isSetup);
 
         //dashboard layout buttons
         Button viewItemList = (Button) findViewById(R.id.viewItems);
@@ -123,13 +119,20 @@ public class vendor_dashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //change shop status to closed
-
+                FirebaseUtils.getCurrentShopID(new FirebaseUtils.Callback() {
+                    @Override
+                    public void OnComplete(String value) {
+                        DatabaseReference databaseReference = FirebaseUtils.getShopsRef().child(value).child(FirebaseEndpoint.SHOPS.SHOPSTATUS);
+                        databaseReference.setValue(ShopStatus.CLOSED);
+                    }
+                });
             }
         });
 
         setLocation.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 //add location tracking
+
             }
         });
 
@@ -140,6 +143,19 @@ public class vendor_dashboard extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void setUpUI(boolean isSetup) {
+        if (isSetup) {
+            setUpLayout.setVisibility(View.VISIBLE);
+            dashboardLayout.setVisibility(View.GONE);
+        } else {
+            setUpLayout.setVisibility(View.GONE);
+            setUpLayout.setVisibility(View.VISIBLE);
+            populateFields();
+        }
+
+
     }
 
     private void populateFields() {
@@ -212,7 +228,6 @@ public class vendor_dashboard extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         boolean notDone = true;
                         if (dataSnapshot.exists()) {
-                            //if shop exists go to shop dashboard
                             Log.w("here", "shop exists " + dataSnapshot.getValue().toString());
 //                            DatabaseReference databaseReference = FirebaseUtils.getCurrentUserShop().child(FirebaseEndpoint.SHOPS.DESCRIPTION).push();
 //                            databaseReference.setValue(the_text);
@@ -276,7 +291,6 @@ public class vendor_dashboard extends AppCompatActivity {
 
                     }
                 });
-
 
 
             }
