@@ -67,10 +67,12 @@ public class vendor_dashboard extends AppCompatActivity {
         Button viewItemList = (Button) findViewById(R.id.viewItems);
         Button updateLocation = (Button) findViewById(R.id.updateLocation);
         Button closeShop = (Button) findViewById(R.id.closeShop);
+        Button addItem = (Button) findViewById(R.id.addItem);
 
         //setup layout buttons
         Button setUpShop = (Button) findViewById(R.id.setUpSubmit);
         Button setLocation = (Button) findViewById(R.id.setUpLocation);
+
 
         shopDescription = (EditText) findViewById(R.id.shopDescr);
         shopDescription.setOnKeyListener(new descriptionTextHandler());
@@ -99,6 +101,13 @@ public class vendor_dashboard extends AppCompatActivity {
         viewItemList.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(vendor_dashboard.this, recycle.class);
+                startActivity(intent);
+            }
+        });
+
+        addItem.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(vendor_dashboard.this, add.class);
                 startActivity(intent);
             }
         });
