@@ -6,6 +6,7 @@ public class FirebaseEndpoint {
     public interface ROOTS {
         String USERS = "users";
         String SHOPS = "shops";
+        String ITEM = "item";
     }
 
     public interface USERS {
@@ -20,5 +21,13 @@ public class FirebaseEndpoint {
         String LOCATION = "location";
         String SHOPSTATUS = "shopStatus";
         String USERID = "userID";
+    }
+
+    public interface ITEMS {
+        String ITEMCATEGORY = "itemCategory";
+        String ITEMIMAGE = "itemImage";
+        String ITEMPRICE = "itemPrice";
+        String ITEMSTOCK = "itemStock";
+        String SHOPID = "shopID";
     }
 }

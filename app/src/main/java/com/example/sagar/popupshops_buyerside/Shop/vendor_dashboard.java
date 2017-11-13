@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sagar.popupshops_buyerside.R;
+import com.example.sagar.popupshops_buyerside.SelectActionActivity;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 import com.example.sagar.popupshops_buyerside.recycle;
@@ -122,6 +123,7 @@ public class vendor_dashboard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //change shop status to closed
+
             }
         });
 
@@ -134,6 +136,8 @@ public class vendor_dashboard extends AppCompatActivity {
         setUpShop.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 createShop(shopName.getText().toString(), shopDescription.getText().toString());
+                Intent intent = new Intent(vendor_dashboard.this, SelectActionActivity.class);
+                startActivity(intent);
             }
         });
     }

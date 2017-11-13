@@ -20,6 +20,10 @@ public class FirebaseUtils {
         return getBaseRef().child(FirebaseEndpoint.ROOTS.SHOPS);
     }
 
+    public static DatabaseReference getItemRef() {
+        return getBaseRef().child(FirebaseEndpoint.ROOTS.ITEM);
+    }
+
     public static FirebaseUser getCurrentUser() {
         return FirebaseAuth.getInstance().getCurrentUser();
     }
