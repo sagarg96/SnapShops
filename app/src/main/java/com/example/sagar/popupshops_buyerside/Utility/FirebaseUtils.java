@@ -62,6 +62,9 @@ public class FirebaseUtils {
         });
     }
 
+    public static void logoutUser() {
+        FirebaseAuth.getInstance().signOut();
+    }
     public interface Callback {
         void OnComplete(String value);
     }

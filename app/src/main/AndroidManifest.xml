@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Registration.LoginActivity"></activity>
         <activity android:name=".MainActivity" />
+
         <activity android:name=".Near_me" />
         <activity android:name=".Shop.add" />
         <activity android:name=".Shop.recycle"></activity>
