@@ -27,6 +27,7 @@ import com.example.sagar.popupshops_buyerside.SelectActionActivity;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
+import com.example.sagar.popupshops_buyerside.Registration.GetLocation;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -64,6 +65,15 @@ public class add extends AppCompatActivity {
         final EditText stockInput = (EditText) findViewById(R.id.itemStockInput);
         final Button attachButton = (Button) findViewById(R.id.attachButton);
         final Button upload = (Button) findViewById(R.id.uploadButton);
+
+
+
+        attachButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View view) {
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
+            }
+        });
 
         ImageButton.OnClickListener listener = new ImageButton.OnClickListener() {
             @Override

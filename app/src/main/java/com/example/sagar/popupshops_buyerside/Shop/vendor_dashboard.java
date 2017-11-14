@@ -20,6 +20,7 @@ import com.example.sagar.popupshops_buyerside.R;
 import com.example.sagar.popupshops_buyerside.Registration.LaunchActivity;
 import com.example.sagar.popupshops_buyerside.SelectActionActivity;
 import com.example.sagar.popupshops_buyerside.SelectActionActivity;
+import com.example.sagar.popupshops_buyerside.Registration.GetLocation;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 import com.example.sagar.popupshops_buyerside.recycle;
@@ -42,6 +43,7 @@ public class vendor_dashboard extends AppCompatActivity {
     LinearLayout setUpLayout;
     LinearLayout dashboardLayout;
     boolean isSetup;
+
 
     @Override
     public void onStart() {
@@ -66,7 +68,7 @@ public class vendor_dashboard extends AppCompatActivity {
 
         //dashboard layout buttons
         Button viewItemList = (Button) findViewById(R.id.viewItems);
-        Button updateLocation = (Button) findViewById(R.id.updateLocation);
+        Button updateLocation = (Button) findViewById(R.id.updateLocation); //location button
         Button closeShop = (Button) findViewById(R.id.closeShop);
         Button addItem = (Button) findViewById(R.id.addItem);
 
@@ -79,6 +81,7 @@ public class vendor_dashboard extends AppCompatActivity {
         shopDescription.setOnKeyListener(new descriptionTextHandler());
         shopName = (EditText) findViewById(R.id.shopName);
         shopName.setOnKeyListener(new nameTextHandler());
+
 
         shopDescription.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -116,6 +119,8 @@ public class vendor_dashboard extends AppCompatActivity {
         updateLocation.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 //add location tracking
+                Intent intent = new Intent(vendor_dashboard.this , GetLocation.class);
+                startActivity(intent);
             }
         });
 

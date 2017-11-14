@@ -18,7 +18,7 @@ public class Near_me extends LoginActivity {
         setContentView(R.layout.near_me);
 
         //TextView tv = (TextView) this.findViewById(R.id.thetext);
-        //tv.setText("App View yo!?\n");
+        //tv.setText("App View yo!?\n"
 
 
     }
