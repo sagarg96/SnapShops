@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.sagar.popupshops_buyerside.Registration.LaunchActivity;
+import com.example.sagar.popupshops_buyerside.Shop.Item;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -44,22 +45,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ///////////////////////////////////////////// Spinner drop down
         Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
-//create a list of items for the spinner.
         String[] items = new String[]{"1", "2", "three"};
-//create an adapter to describe how the items are displayed, adapters are used in several places in android.
-//There are multiple variations of this, but this is the basic variant.
+        //create an adapter to describe how the items are displayed, adapters are used in several places in android.
+        //There are multiple variations of this, but this is the basic variant.
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
-//set the spinners adapter to the previously created one.
+        //set the spinners adapter to the previously created one.
         dropdown.setAdapter(adapter);
-
-
-
-
-
-        //////////////////////////////////////////////////
-
 
         mSwipeView = (SwipePlaceHolderView) findViewById(R.id.swipeView);
         mContext = getApplicationContext();
@@ -73,63 +65,40 @@ public class MainActivity extends AppCompatActivity {
                         .setSwipeOutMsgLayoutId(R.layout.tinder_swipe_out_msg_view));
 
 
-//        for (Profile profile : Utils.loadProfiles(this.getApplicationContext())) {
-//            mSwipeView.addView(new TinderCard(mContext, profile, mSwipeView));
-//        }
-
-        ChildEventListener childEventListener = new ChildEventListener() {
+        ChildEventListener itemEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Log.d("TAG", "onChildAdded:" + dataSnapshot.getKey());
-                Profile profile = dataSnapshot.getValue(Profile.class);
-                mSwipeView.addView(new TinderCard(mContext, profile, mSwipeView));
+                Item item = dataSnapshot.getValue(Item.class);
+                mSwipeView.addView(new ItemCard(mContext, item, mSwipeView));
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {}
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
         };
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("profile");
+        DatabaseReference itemRef = database.getReference("item");
 
-        myRef.addChildEventListener(childEventListener);
+        itemRef.addChildEventListener(itemEventListener);
 
-        /*public void TabNavigation(){
-
-            ActionBar actionBar = getSupportActionBar();
-            actionBar.setNavigationMode(actionBar.NAVIGATION_MODE_TABS);
-
-
-    }*/
-
-        /* Buttons for tinder
-    findViewById(R.id.rejectBtn).
-
-    setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick (View v){
-            mSwipeView.doSwipe(false);
-        }
-    });
-
-    findViewById(R.id.acceptBtn).
-
-    setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick (View v){
-            mSwipeView.doSwipe(true);
-        }
-    });
-    */
 }
 
 
@@ -159,8 +128,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
 }
 
