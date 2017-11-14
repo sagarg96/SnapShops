@@ -1,5 +1,7 @@
 package com.example.sagar.popupshops_buyerside.Shop;
 
+import com.example.sagar.popupshops_buyerside.Registration.GetLocation;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,9 +24,10 @@ public class ShopProfile {
         this.shopName = shopName;
         this.description = description;
         this.items = new ArrayList<>();
-        location = new HashMap<>();
-        location.put("latitude", locationLatitude);
-        location.put("longitude", locationLongitude);
+        this.location = GetLocation.getLocation();
+//        location = new HashMap<>();
+//        location.put("latitude", locationLatitude);
+//        location.put("longitude", locationLongitude);
         shopStatus = ShopStatus.OPEN;
         this.userID = userID;
     }

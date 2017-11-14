@@ -26,8 +26,10 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-
+import java.util.Map;
 import java.util.HashMap;
+
+
 
 
 public class GetLocation extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
@@ -52,6 +54,8 @@ public class GetLocation extends AppCompatActivity implements GoogleApiClient.Co
     private TextView lblLocation;
     private Button btnShowLocation, btnStartLocationUpdates;
 
+    private Map<String, Double> locationHashMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,12 +77,12 @@ public class GetLocation extends AppCompatActivity implements GoogleApiClient.Co
             }
         });
 
-//        btnStartLocationUpdates.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                togglePeriodLocationUpdates();
-//            }
-//        });
+        btnStartLocationUpdates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                togglePeriodLocationUpdates();
+            }
+        });
     }
 
     @Override
@@ -115,6 +119,13 @@ public class GetLocation extends AppCompatActivity implements GoogleApiClient.Co
         stopLocationUpdates();
     }
 
+    public static Map<String, Double> getLocation(){
+
+        GetLocation obj = new GetLocation();
+        obj.displayLocation();
+        return obj.locationHashMap;
+    }
+
     private void displayLocation() {
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -130,36 +141,41 @@ public class GetLocation extends AppCompatActivity implements GoogleApiClient.Co
             return;
         }
 
-        // get location update
-        startLocationUpdates();
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
             double latitude = mLastLocation.getLatitude();
-            double longtitude = mLastLocation.getLongitude();
+            double longitude = mLastLocation.getLongitude();
 
-            lblLocation.setText(latitude + ", " + longtitude);
+            locationHashMap = new HashMap();
+            locationHashMap.put("latitude", latitude);
+            locationHashMap.put("longitude", longitude);
+            lblLocation.setText(latitude + ", " + longitude);
+
+
+
         } else {
             lblLocation.setText("Couldn't get the location. Make sure location is enabled on the device");
+            return;
         }
-       // stopLocationUpdates();
+
     }
 
-//
-//    private void togglePeriodLocationUpdates() {
-//        if (!mRequestLocationUpdates) {
-//            btnStartLocationUpdates.setText("Stop Update");
-//
-//            mRequestLocationUpdates = true;
-//
-//            startLocationUpdates();
-//        } else {
-//            btnStartLocationUpdates.setText("Start Update");
-//
-//            mRequestLocationUpdates = false;
-//
-//            stopLocationUpdates();
-//        }
-//    }
+
+    private void togglePeriodLocationUpdates() {
+        if (!mRequestLocationUpdates) {
+            btnStartLocationUpdates.setText("Stop Update");
+
+            mRequestLocationUpdates = true;
+
+            startLocationUpdates();
+        } else {
+            btnStartLocationUpdates.setText("Start Update");
+
+            mRequestLocationUpdates = false;
+
+            stopLocationUpdates();
+        }
+    }
 
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
