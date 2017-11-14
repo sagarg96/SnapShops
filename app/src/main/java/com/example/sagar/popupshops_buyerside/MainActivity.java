@@ -3,6 +3,7 @@ package com.example.sagar.popupshops_buyerside;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +13,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.sagar.popupshops_buyerside.Registration.LaunchActivity;
-import com.example.sagar.popupshops_buyerside.Registration.LoginActivity;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
-public class MainActivity extends LoginActivity {
+public class MainActivity extends AppCompatActivity {
 
     private final String TAG = "MainActivity";
     private SwipePlaceHolderView mSwipeView;
