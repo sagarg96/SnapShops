@@ -23,7 +23,7 @@
         <!--<activity android:name=".display" />-->
 
 
-        <activity android:name=".Registration.LaunchActivity">
+        <activity android:name=".Registration.LaunchActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
