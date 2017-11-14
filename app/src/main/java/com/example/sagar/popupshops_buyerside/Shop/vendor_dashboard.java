@@ -18,7 +18,6 @@ import com.example.sagar.popupshops_buyerside.R;
 import com.example.sagar.popupshops_buyerside.SelectActionActivity;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
-import com.example.sagar.popupshops_buyerside.recycle;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -123,6 +122,7 @@ public class vendor_dashboard extends AppCompatActivity {
                     @Override
                     public void OnComplete(String value) {
                         DatabaseReference databaseReference = FirebaseUtils.getShopsRef().child(value).child(FirebaseEndpoint.SHOPS.SHOPSTATUS);
+
                         databaseReference.setValue(ShopStatus.CLOSED);
                     }
                 });

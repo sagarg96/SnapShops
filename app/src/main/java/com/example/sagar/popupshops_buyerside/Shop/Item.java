@@ -24,6 +24,10 @@ public class Item {
         this.itemStock = itemStock;
     }
 
+    public static int getAttributeCount() {
+        return 6;
+    }
+
     public int getItemPrice() {
         return itemPrice;
     }
