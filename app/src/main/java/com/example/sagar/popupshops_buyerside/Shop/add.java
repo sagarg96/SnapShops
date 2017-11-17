@@ -24,8 +24,10 @@ import android.widget.Toast;
 import com.example.sagar.popupshops_buyerside.R;
 import com.example.sagar.popupshops_buyerside.Registration.LaunchActivity;
 import com.example.sagar.popupshops_buyerside.SelectActionActivity;
-import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
+import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -47,7 +49,7 @@ public class add extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int RESULT_LOAD_IMAGE = 2;
-
+    private static final String TAG = "add";
     private static Uri imageUrl = null;
     private static StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -126,9 +128,28 @@ public class add extends AppCompatActivity {
                                                                             String val = dataSnapshot.getValue().toString();
                                                                             dbRef.child(FirebaseEndpoint.ITEMS.SHOPID).setValue(val.substring(1, val.length() - 1));
                                                                             notDone = false;
+
+                                                                            Query shopLocationQuery = FirebaseUtils.getShopsRef().child(val.substring(1, val.length() - 1));
+                                                                            shopLocationQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                                @Override
+                                                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                                    if (dataSnapshot.hasChild(FirebaseEndpoint.SHOPS.LOCATION)) {
+                                                                                        Log.w(TAG, dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).getValue().toString());
+                                                                                        double latitude = (double) dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("latitude").getValue();
+                                                                                        double longitude = (double) dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("longitude").getValue();
+                                                                                        DatabaseReference geoRef = FirebaseUtils.getBaseRef().child("item_location");
+                                                                                        GeoFire geofire = new GeoFire(geoRef);
+                                                                                        geofire.setLocation(dbRef.getKey(), new GeoLocation(latitude, longitude));
+
+                                                                                    }
+                                                                                }
+
+                                                                                @Override
+                                                                                public void onCancelled(DatabaseError databaseError) {
+
+                                                                                }
+                                                                            });
                                                                         }
-
-
                                                                     }
                                                                 }
 
@@ -140,6 +161,8 @@ public class add extends AppCompatActivity {
 
                                                                 }
                                                             });
+
+
                                                             Toast.makeText(add.this, "Item successfully uploaded", Toast.LENGTH_LONG).show();
 
                                                         }
