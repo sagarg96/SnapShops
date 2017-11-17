@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PopUpShops.iml" filepath="$PROJECT_DIR$/PopUpShops.iml" />
+      <module fileurl="file://C:\Users\Vikram\AndroidStudioProjects\PopUpShops-master\PopUpShops.iml" filepath="C:\Users\Vikram\AndroidStudioProjects\PopUpShops-master\PopUpShops.iml" />
       <module fileurl="file://$PROJECT_DIR$/PopUpShops-master.iml" filepath="$PROJECT_DIR$/PopUpShops-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
