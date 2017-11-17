@@ -28,6 +28,7 @@ import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,6 +44,7 @@ import java.util.Map;
 public class vendor_dashboard extends AppCompatActivity {
 
     private static final int REQUEST_CODE_PERMISSION = 2;
+    private static final String TAG = "vendor_dashboard";
     String id;
     EditText shopDescription;
     EditText shopName;
@@ -174,10 +176,58 @@ public class vendor_dashboard extends AppCompatActivity {
                     }
                 });
 
-                //update location in shopLocationTree
+                //TODO update location in shopLocationTree
+                FirebaseUtils.getCurrentShopID(new FirebaseUtils.Callback() {
+                    @Override
+                    public void OnComplete(String value) {
+                        DatabaseReference geoRef = FirebaseUtils.getShopLocationRef();
+                        GeoFire geofire = new GeoFire(geoRef);
+                        geofire.setLocation(value, new GeoLocation(latitude, longitude));
 
+                    }
+                });
 
-                //update location of corresponding items
+                //TODO update location of corresponding items
+                FirebaseUtils.getCurrentShopID(new FirebaseUtils.Callback() {
+                    @Override
+                    public void OnComplete(String value) {
+                        final Query itemQuery = FirebaseUtils.getItemRef().orderByChild(FirebaseEndpoint.ITEMS.SHOPID).equalTo(value);
+                        itemQuery.addChildEventListener(new ChildEventListener() {
+                            @Override
+                            public void onChildAdded(DataSnapshot itemSnapshot, String s) {
+                                Log.d(TAG, "onChildAdded:" + itemSnapshot.getKey());
+                                DatabaseReference geoRef = FirebaseUtils.getItemLocationRef();
+                                GeoFire geofire = new GeoFire(geoRef);
+                                geofire.setLocation(itemSnapshot.getKey(), new GeoLocation(latitude, longitude));
+
+                            }
+
+                            @Override
+                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                            }
+
+                            @Override
+                            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                                Log.d(TAG, "onChildRemoved:" + dataSnapshot.getKey());
+
+                            }
+
+                            @Override
+                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Log.w(TAG, "itemsDisplay:onCancelled", databaseError.toException());
+
+                            }
+
+                        });
+
+                    }
+                });
             }
         });
 
@@ -283,7 +333,7 @@ public class vendor_dashboard extends AppCompatActivity {
         databaseReference.setValue(newShop);
 
         //create geofire entry
-        DatabaseReference geoRef = FirebaseUtils.getBaseRef().child("shops_location");
+        DatabaseReference geoRef = FirebaseUtils.getShopsRef();
         GeoFire geofire = new GeoFire(geoRef);
         geofire.setLocation(databaseReference.getKey(), new GeoLocation(latitude, longitude));
 

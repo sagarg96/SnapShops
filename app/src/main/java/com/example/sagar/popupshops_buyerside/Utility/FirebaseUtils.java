@@ -31,6 +31,14 @@ public class FirebaseUtils {
         return getBaseRef().child(FirebaseEndpoint.ROOTS.ITEM);
     }
 
+    public static DatabaseReference getShopLocationRef() {
+        return getBaseRef().child(FirebaseEndpoint.ROOTS.SHOP_LOCATION);
+    }
+
+    public static DatabaseReference getItemLocationRef() {
+        return getBaseRef().child(FirebaseEndpoint.ROOTS.ITEM_LOCATION);
+    }
+
     public static FirebaseUser getCurrentUser() {
         return FirebaseAuth.getInstance().getCurrentUser();
     }

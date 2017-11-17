@@ -7,6 +7,8 @@ public class FirebaseEndpoint {
         String USERS = "users";
         String SHOPS = "shops";
         String ITEM = "item";
+        String SHOP_LOCATION = "shops_location";
+        String ITEM_LOCATION = "item_location";
     }
 
     public interface USERS {
