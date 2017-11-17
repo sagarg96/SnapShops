@@ -26,8 +26,6 @@ import com.example.sagar.popupshops_buyerside.Registration.LaunchActivity;
 import com.example.sagar.popupshops_buyerside.SelectActionActivity;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
-import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
-import com.example.sagar.popupshops_buyerside.Registration.GetLocation;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
