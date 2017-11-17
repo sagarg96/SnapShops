@@ -2,7 +2,6 @@ package com.example.sagar.popupshops_buyerside;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 

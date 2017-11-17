@@ -29,5 +29,6 @@ public class FirebaseEndpoint {
         String ITEMPRICE = "itemPrice";
         String ITEMSTOCK = "itemStock";
         String SHOPID = "shopID";
+        String ITEMDESCRIPTION = "itemDescription";
     }
 }

@@ -67,7 +67,6 @@ public class add extends AppCompatActivity {
         final Button upload = (Button) findViewById(R.id.uploadButton);
 
 
-
         attachButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -130,7 +129,7 @@ public class add extends AppCompatActivity {
                                                                             notDone = false;
 
                                                                             Query shopLocationQuery = FirebaseUtils.getShopsRef().child(val.substring(1, val.length() - 1));
-                                                                            shopLocationQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                            shopLocationQuery.addValueEventListener(new ValueEventListener() {
                                                                                 @Override
                                                                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                                                                     if (dataSnapshot.hasChild(FirebaseEndpoint.SHOPS.LOCATION)) {

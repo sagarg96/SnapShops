@@ -54,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
         String[] items = new String[]{"1", "2", "three"}; //TODO: GET FROM DB
 
 
-
-
         //create an adapter to describe how the items are displayed, adapters are used in several places in android.
         //There are multiple variations of this, but this is the basic variant.
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -137,8 +135,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 
 
     public void showAlertbox(String title) {

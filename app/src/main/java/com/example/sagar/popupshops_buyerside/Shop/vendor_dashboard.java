@@ -25,7 +25,6 @@ import com.example.sagar.popupshops_buyerside.Registration.LaunchActivity;
 import com.example.sagar.popupshops_buyerside.SelectActionActivity;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
-import com.example.sagar.popupshops_buyerside.recycle;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.google.firebase.auth.FirebaseAuth;
@@ -134,6 +133,7 @@ public class vendor_dashboard extends AppCompatActivity {
         viewItemList.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(vendor_dashboard.this, recycle.class);
+
                 startActivity(intent);
             }
         });
@@ -161,6 +161,8 @@ public class vendor_dashboard extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 setLocationAttributes();
+
+                //update location in shopTree
                 FirebaseUtils.getCurrentShopID(new FirebaseUtils.Callback() {
                     @Override
                     public void OnComplete(String value) {
@@ -171,6 +173,11 @@ public class vendor_dashboard extends AppCompatActivity {
                         databaseReference.setValue(location);
                     }
                 });
+
+                //update location in shopLocationTree
+
+
+                //update location of corresponding items
             }
         });
 
@@ -183,6 +190,7 @@ public class vendor_dashboard extends AppCompatActivity {
                     @Override
                     public void OnComplete(String value) {
                         DatabaseReference databaseReference = FirebaseUtils.getShopsRef().child(value).child(FirebaseEndpoint.SHOPS.SHOPSTATUS);
+
                         databaseReference.setValue(ShopStatus.CLOSED);
                     }
                 });
@@ -403,6 +411,5 @@ public class vendor_dashboard extends AppCompatActivity {
             return false;
         }
     }
-
 
 }
