@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.sagar.popupshops_buyerside.Shop.Item;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.Resolve;
@@ -17,12 +18,8 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeInState;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOut;
 import com.mindorks.placeholderview.annotations.swipe.SwipeOutState;
 
-/**
- * Created by sagar on 10/16/17.
- */
-
 @Layout(R.layout.tinder_card_view)
-public class TinderCard {
+public class ItemCard {
 
     @View(R.id.profileImageView)
     private ImageView profileImageView;
@@ -30,24 +27,24 @@ public class TinderCard {
     @View(R.id.nameAgeTxt)
     private TextView nameAgeTxt;
 
-    @View(R.id.locationNameTxt)
-    private Button locationNameTxt;
+//    @View(R.id.locationNameTxt)
+//    private Button locationNameTxt;
 
-    private Profile mProfile;
+    private Item mItem;
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
 
-    public TinderCard(Context context, Profile profile, SwipePlaceHolderView swipeView) {
+    public ItemCard(Context context, Item item, SwipePlaceHolderView swipeView) {
         mContext = context;
-        mProfile = profile;
+        mItem = item;
         mSwipeView = swipeView;
     }
 
     @Resolve
     private void onResolved(){
-        Glide.with(mContext).load(mProfile.getImageUrl()).into(profileImageView);
-        nameAgeTxt.setText(mProfile.getName() + ", $" + mProfile.getPrice());
-        locationNameTxt.setText(mProfile.getLocation());
+        Glide.with(mContext).load(mItem.getItemImage()).into(profileImageView);
+        nameAgeTxt.setText(mItem.getItemDescription() + ", $" + mItem.getItemPrice());
+//        locationNameTxt.setText(mProfile.getLocation());
     }
 
     @SwipeOut

@@ -57,7 +57,8 @@ public class SelectActionActivity extends AppCompatActivity {
         buyButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -67,8 +68,6 @@ public class SelectActionActivity extends AppCompatActivity {
                 checkShopExists(FirebaseUtils.getCurrentUser());
             }
         });
-
-
     }
 
     private void checkShopExists(FirebaseUser currentUser) {

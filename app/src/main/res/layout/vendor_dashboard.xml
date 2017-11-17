@@ -88,6 +88,14 @@
                 app:layout_constraintRight_toRightOf="parent" />
 
             <Button
+                android:id="@+id/updateLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update Location"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <Button
                 android:id="@+id/viewItems"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -130,29 +138,21 @@
             tools:layout_constraintTop_creator="1">
 
             <Button
-                android:id="@+id/setUpSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Set Up Shop!" />
-
-            <Button
                 android:id="@+id/setUpLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Set Location"
                 app:layout_constraintTop_toBottomOf="@+id/setUpSubmit" />
+
+            <Button
+                android:id="@+id/setUpSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Set Up Shop!" />
+
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/updateLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Update Location"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
 
 </android.support.constraint.ConstraintLayout>
