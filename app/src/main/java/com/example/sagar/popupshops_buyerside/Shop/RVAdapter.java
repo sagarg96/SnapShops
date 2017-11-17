@@ -35,7 +35,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
 
     @Override
     public void onBindViewHolder(ItemViewHolder itemViewHolder, int i) {
-        itemViewHolder.itemPrice.setText(lists.get(i).getItemPrice());
+        itemViewHolder.itemPrice.setText(String.valueOf(lists.get(i).getItemPrice()));
         itemViewHolder.itemDescr.setText(lists.get(i).getItemDescription());
         itemViewHolder.itemCategory.setText(lists.get(i).getItemCategory());
         itemViewHolder.itemImage.setImageURI(Uri.parse(lists.get(i).getItemImage()));

@@ -4,7 +4,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -13,17 +19,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Registration.LoginActivity"></activity>
+        <activity android:name=".Registration.LoginActivity" />
         <activity android:name=".MainActivity" />
-
         <activity android:name=".Near_me" />
         <activity android:name=".Shop.add" />
-        <activity android:name=".Shop.recycle"></activity>
-        <activity android:name=".Shop.vendor_dashboard"></activity>
-        <!--<activity android:name=".display" />-->
+        <activity android:name=".Shop.recycle" />
+        <activity android:name=".Shop.vendor_dashboard" />
+        <!-- <activity android:name=".display" /> -->
 
-
-        <activity android:name=".Registration.LaunchActivity" >
+        <activity android:name=".Registration.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +35,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Registration.SignupActivity" />
-        <activity android:name=".SelectActionActivity"></activity>
+        <activity android:name=".SelectActionActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -40,12 +44,11 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
-    </application>
 
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true" />
+        <activity android:name=".Shop.ItemCatalogue" />
+        <activity android:name=".Shop.ItemCatalogue2"></activity>
+    </application>
 
 </manifest>

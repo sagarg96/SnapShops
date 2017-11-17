@@ -47,4 +47,15 @@ public class Item {
     public int getItemStock() {
         return itemStock;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "itemCategory='" + itemCategory + '\'' +
+                ", itemPrice=" + itemPrice +
+                ", itemDescription='" + itemDescription + '\'' +
+                ", itemImage='" + itemImage + '\'' +
+                ", itemStock=" + itemStock +
+                '}';
+    }
 }

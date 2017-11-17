@@ -63,8 +63,7 @@
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        android:id="@+id/linearLayout">
+        tools:layout_constraintTop_creator="1">
 
         <LinearLayout
             android:id="@+id/dashboardLayout"

@@ -18,8 +18,6 @@ import android.widget.Toast;
 
 import com.example.sagar.popupshops_buyerside.R;
 import com.example.sagar.popupshops_buyerside.Registration.LaunchActivity;
-import com.example.sagar.popupshops_buyerside.Registration.LaunchActivity;
-import com.example.sagar.popupshops_buyerside.SelectActionActivity;
 import com.example.sagar.popupshops_buyerside.SelectActionActivity;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
@@ -101,7 +99,9 @@ public class vendor_dashboard extends AppCompatActivity {
 
         viewItemList.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
+//                Intent intent = new Intent(vendor_dashboard.this, recycle.class);
                 Intent intent = new Intent(vendor_dashboard.this, recycle.class);
+
                 startActivity(intent);
             }
         });
