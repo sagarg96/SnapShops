@@ -1,6 +1,7 @@
 package com.example.sagar.popupshops_buyerside.Shop;
 
 import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,10 +16,10 @@ import java.util.List;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
 
-    List<Item> lists;
+    private List<Item> itemList;
 
-    RVAdapter(List<Item> persons) {
-        this.lists = persons;
+    RVAdapter(List<Item> items) {
+        this.itemList = items;
     }
 
     @Override
@@ -29,21 +30,26 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.display, viewGroup, false);
-        ItemViewHolder pvh = new ItemViewHolder(v);
-        return pvh;
+        return new ItemViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(ItemViewHolder itemViewHolder, int i) {
-        itemViewHolder.itemPrice.setText(String.valueOf(lists.get(i).getItemPrice()));
-        itemViewHolder.itemDescr.setText(lists.get(i).getItemDescription());
-        itemViewHolder.itemCategory.setText(lists.get(i).getItemCategory());
-        itemViewHolder.itemImage.setImageURI(Uri.parse(lists.get(i).getItemImage()));
+    public void onBindViewHolder(ItemViewHolder itemViewHolder, int position) {
+        itemViewHolder.itemPrice.setText(String.valueOf(itemList.get(position).getItemPrice()));
+        itemViewHolder.itemDescr.setText(itemList.get(position).getItemDescription());
+        itemViewHolder.itemCategory.setText(itemList.get(position).getItemCategory());
+        itemViewHolder.itemImage.setImageURI(Uri.parse(itemList.get(position).getItemImage()));
+        itemViewHolder.deleteButton.setOnClickListener(new FloatingActionButton.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO add deletion mechanism
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return lists.size();
+        return itemList.size();
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -53,6 +59,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
         TextView itemCategory;
         TextView itemPrice;
         ImageView itemImage;
+        FloatingActionButton deleteButton;
 
         ItemViewHolder(View itemView) {
             super(itemView);
@@ -61,6 +68,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
             itemCategory = (TextView) itemView.findViewById(R.id.itemCateg);
             itemPrice = (TextView) itemView.findViewById(R.id.itemPrice);
             itemImage = (ImageView) itemView.findViewById(R.id.itemImage);
+            deleteButton = itemView.findViewById(R.id.fab);
         }
     }
 }

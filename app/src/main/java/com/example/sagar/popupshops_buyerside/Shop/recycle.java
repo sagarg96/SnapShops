@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.sagar.popupshops_buyerside.R;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
@@ -21,38 +22,38 @@ public class recycle extends AppCompatActivity {
 
     private static final String TAG = "recycle";
     private List<Item> items;
+    private List<String> itemIds;
     private RecyclerView rv;
     private RVAdapter rvAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.recycle);
 
         rv = (RecyclerView) findViewById(R.id.rv);
-
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
         rv.setHasFixedSize(true);
 
         initializeData();
-        //TODO possible issue here initialise adapter after data added
-//        initializeAdapter();
+
 
 //        FloatingActionButton FAB = (FloatingActionButton) findViewById(R.id.fab);
-//        FAB.setOnClickListener(new View.OnClickListener() {
+//        FAB.setOnClickListener(new FloatingActionButton.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
 //
 //                //remove from dp here
 //            }
-//        })
+//        });
     }
 
     private void initializeData() {
         items = new ArrayList<>();
-        //items.add(new Item("hello",0,"hello","hello",0));
+        itemIds = new ArrayList<>();
+
+        //TODO remove child event listener on app stop
 
         FirebaseUtils.getCurrentShopID(new FirebaseUtils.Callback() {
             @Override
@@ -61,6 +62,7 @@ public class recycle extends AppCompatActivity {
                 itemQuery.addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot itemSnapshot, String s) {
+                        Log.d(TAG, "onChildAdded:" + itemSnapshot.getKey());
                         Log.w("children count", "" + itemSnapshot.getChildrenCount());
                         if (itemSnapshot.getChildrenCount() == Item.getAttributeCount()) {
                             boolean added = items.add(
@@ -73,30 +75,11 @@ public class recycle extends AppCompatActivity {
                                                     Integer.parseInt(itemSnapshot.child(FirebaseEndpoint.ITEMS.ITEMSTOCK).getValue().toString())
                                             )
                             );
-
+                            itemIds.add(itemSnapshot.getKey());
                             Log.w(TAG, String.valueOf(added));
                             rvAdapter = new RVAdapter(items);
                             rv.setAdapter(rvAdapter);
                         }
-
-
-//                        for (DataSnapshot itemSnapshot : dataSnapshot.getChildren()) {
-//                            Log.w("here", itemSnapshot.getKey());
-//                            Log.w("here", itemSnapshot.getValue().toString());
-//                            if (itemSnapshot.getChildrenCount() == Item.getAttributeCount()) {
-//                                items.add(
-//                                        new Item
-//                                                (
-//                                                        itemSnapshot.child(FirebaseEndpoint.ITEMS.ITEMCATEGORY).getValue().toString(),
-//                                                        Integer.parseInt(itemSnapshot.child(FirebaseEndpoint.ITEMS.ITEMPRICE).getValue().toString()),
-//                                                        itemSnapshot.child(FirebaseEndpoint.ITEMS.ITEMDESCRIPTION).getValue().toString(),
-//                                                        itemSnapshot.child(FirebaseEndpoint.ITEMS.ITEMIMAGE).getValue().toString(),
-//                                                        Integer.parseInt(itemSnapshot.child(FirebaseEndpoint.ITEMS.ITEMSTOCK).getValue().toString())
-//                                                )
-//                                );
-//                            }
-////                                items.add(itemSnapshot.getValue(Item.class));
-//                        }
                     }
 
                     @Override
@@ -106,7 +89,21 @@ public class recycle extends AppCompatActivity {
 
                     @Override
                     public void onChildRemoved(DataSnapshot dataSnapshot) {
+                        Log.d(TAG, "onChildRemoved:" + dataSnapshot.getKey());
 
+                        String itemKey = dataSnapshot.getKey();
+
+                        int itemIndex = itemIds.indexOf(itemKey);
+                        if (itemIndex > -1) {
+                            // Remove data from the list
+                            itemIds.remove(itemIndex);
+                            items.remove(itemIndex);
+
+                            // Update the RecyclerView
+                            rvAdapter.notifyItemRemoved(itemIndex);
+                        } else {
+                            Log.w(TAG, "onChildRemoved:unknown_child:" + itemKey);
+                        }
                     }
 
                     @Override
@@ -116,7 +113,9 @@ public class recycle extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-
+                        Log.w(TAG, "itemsDisplay:onCancelled", databaseError.toException());
+                        Toast.makeText(getParent().getBaseContext(), "Failed to load items.",
+                                Toast.LENGTH_SHORT).show();
                     }
 
                 });
@@ -124,11 +123,6 @@ public class recycle extends AppCompatActivity {
             }
         });
 
-        //connect to DB
     }
 
-    private void initializeAdapter() {
-        RVAdapter adapter = new RVAdapter(items);
-        rv.setAdapter(adapter);
-    }
 }

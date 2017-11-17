@@ -1,9 +1,5 @@
 package com.example.sagar.popupshops_buyerside.Shop;
 
-/**
- * Created by Fawad Masood Desmukh on 11/5/2017.
- */
-
 public class Item {
 
     private String itemCategory;

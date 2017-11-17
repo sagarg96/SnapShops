@@ -47,8 +47,6 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".Shop.ItemCatalogue" />
-        <activity android:name=".Shop.ItemCatalogue2"></activity>
     </application>
 
 </manifest>
