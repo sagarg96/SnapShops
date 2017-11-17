@@ -2,7 +2,6 @@ package com.example.sagar.popupshops_buyerside.Shop;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +26,8 @@ import com.example.sagar.popupshops_buyerside.SelectActionActivity;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 import com.example.sagar.popupshops_buyerside.recycle;
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,21 +37,21 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class vendor_dashboard extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_PERMISSION = 2;
     String id;
     EditText shopDescription;
     EditText shopName;
     LinearLayout setUpLayout;
     LinearLayout dashboardLayout;
     boolean isSetup;
-
     Button updateLocation;
     Button setLocation;
-
-    private static final int REQUEST_CODE_PERMISSION = 2;
     String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
 
     // GPSTracker class
@@ -72,7 +72,7 @@ public class vendor_dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vendor_dashboard);
 
-    //Location Permissions
+        //Location Permissions
         try {
             if (ActivityCompat.checkSelfPermission(this, mPermission) != PackageManager.PERMISSION_GRANTED) {
 
@@ -149,24 +149,8 @@ public class vendor_dashboard extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                // create class object
-                gps = new GPSTracker(vendor_dashboard.this);
 
-                // check if GPS enabled
-                if(gps.canGetLocation()){
-
-                    latitude = gps.getLatitude();
-                    longitude = gps.getLongitude();
-
-                    // \n is for new line
-                    Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
-                            + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-                }else{
-                    // can't get location
-                    // GPS or Network is not enabled
-                    // Ask user to enable GPS/network in settings
-                    gps.showSettingsAlert();
-                }
+                setLocationAttributes();
 
             }
         });
@@ -176,32 +160,23 @@ public class vendor_dashboard extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                // create class object
-                gps = new GPSTracker(vendor_dashboard.this);
-
-                // check if GPS enabled
-                if(gps.canGetLocation()){
-
-                    latitude = gps.getLatitude();
-                    longitude = gps.getLongitude();
-
-                    // \n is for new line
-                    Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
-                            + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-                }else{
-                    // can't get location
-                    // GPS or Network is not enabled
-                    // Ask user to enable GPS/network in settings
-                    gps.showSettingsAlert();
-                }
-
+                setLocationAttributes();
+                FirebaseUtils.getCurrentShopID(new FirebaseUtils.Callback() {
+                    @Override
+                    public void OnComplete(String value) {
+                        DatabaseReference databaseReference = FirebaseUtils.getShopsRef().child(value).child(FirebaseEndpoint.SHOPS.LOCATION);
+                        Map<String, Double> location = new HashMap<String, Double>();
+                        location.put("latitude", latitude);
+                        location.put("longitude", longitude);
+                        databaseReference.setValue(location);
+                    }
+                });
             }
         });
 
         closeShop.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 //change shop status to closed
                 FirebaseUtils.getCurrentShopID(new FirebaseUtils.Callback() {
@@ -222,6 +197,27 @@ public class vendor_dashboard extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void setLocationAttributes() {
+        // create class object
+        gps = new GPSTracker(vendor_dashboard.this);
+
+        // check if GPS enabled
+        if (gps.canGetLocation()) {
+
+            latitude = gps.getLatitude();
+            longitude = gps.getLongitude();
+
+            // \n is for new line
+            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
+                    + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+        } else {
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+            gps.showSettingsAlert();
+        }
     }
 
     private void setUpUI(boolean isSetup) {
@@ -274,10 +270,14 @@ public class vendor_dashboard extends AppCompatActivity {
 
     private void createShop(String shopName, String shopDescription) {
         //create shop in shop table
-        // TODO test more - sometimes userID not register
         ShopProfile newShop = new ShopProfile(shopName, shopDescription, latitude, longitude, FirebaseAuth.getInstance().getCurrentUser().getUid());
         DatabaseReference databaseReference = FirebaseUtils.getShopsRef().push();
         databaseReference.setValue(newShop);
+
+        //create geofire entry
+        DatabaseReference geoRef = FirebaseUtils.getBaseRef().child("shops_location");
+        GeoFire geofire = new GeoFire(geoRef);
+        geofire.setLocation(databaseReference.getKey(), new GeoLocation(latitude, longitude));
 
         //update shops in users table
         List shopList = new ArrayList<String>();
@@ -288,6 +288,33 @@ public class vendor_dashboard extends AppCompatActivity {
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            Intent intent = new Intent(vendor_dashboard.this, SelectActionActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.action_settings2) {
+            FirebaseUtils.logoutUser();
+            Intent intent = new Intent(vendor_dashboard.this, LaunchActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public class descriptionTextHandler implements View.OnKeyListener {
@@ -375,34 +402,6 @@ public class vendor_dashboard extends AppCompatActivity {
             }
             return false;
         }
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(vendor_dashboard.this, SelectActionActivity.class);
-            startActivity(intent);
-        }
-        if (id == R.id.action_settings2) {
-            FirebaseUtils.logoutUser();
-            Intent intent = new Intent(vendor_dashboard.this, LaunchActivity.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 

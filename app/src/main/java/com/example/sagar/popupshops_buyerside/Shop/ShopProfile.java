@@ -22,7 +22,6 @@ public class ShopProfile {
         this.shopName = shopName;
         this.description = description;
         this.items = new ArrayList<>();
-        //this.location = GetLocation.getLocation();
         location = new HashMap<>();
         location.put("latitude", locationLatitude);
         location.put("longitude", locationLongitude);
