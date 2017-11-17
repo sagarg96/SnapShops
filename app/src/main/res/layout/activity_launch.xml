@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_bg"
     tools:context="com.example.sagar.popupshops_buyerside.Registration.LaunchActivity">
 
     <!--android:background="@drawable/bg2"-->
@@ -29,8 +30,9 @@
         android:layout_marginBottom="47dp"
         android:background="@color/colorPrimary"
         android:text="Login"
-        android:textColor="@color/white"
         android:textSize="18dp"
+        android:textColor="@color/black"
+        android:background="@null"
         app:layout_constraintBottom_toTopOf="@+id/signupButton"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="@+id/signupButton"
@@ -45,9 +47,9 @@
         android:layout_height="70dp"
         android:layout_marginTop="174dp"
         android:height="@android:dimen/notification_large_icon_height"
-        android:background="@color/colorPrimary"
+        android:background="@null"
         android:text="Sign Up"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintLeft_toLeftOf="parent"

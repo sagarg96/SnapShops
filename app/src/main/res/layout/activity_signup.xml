@@ -13,24 +13,30 @@
         android:layout_marginLeft="28dp"
         android:layout_marginStart="28dp"
         android:text="User Name"
+        android:textSize="15sp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/userName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/userName"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintVertical_bias="0.619" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email"
+        android:textSize="15sp"
+        android:textColor="@color/black"
         app:layout_constraintBaseline_toBaselineOf="@+id/emailSignUp"
         app:layout_constraintLeft_toLeftOf="@+id/textView3"
         app:layout_constraintRight_toRightOf="@+id/textView3"
         tools:layout_constraintBaseline_creator="1"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintHorizontal_bias="0.324" />
 
     <TextView
         android:id="@+id/textView5"
@@ -40,6 +46,8 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="9dp"
         android:text="Password"
+        android:textSize="15sp"
+        android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/passwordSignUp"
         tools:layout_constraintLeft_creator="1"
@@ -51,27 +59,33 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
+        android:textSize="15sp"
+        android:textColor="@color/black"
         android:inputType="textEmailAddress"
         app:layout_constraintLeft_toLeftOf="@+id/userName"
         app:layout_constraintRight_toRightOf="@+id/userName"
         app:layout_constraintTop_toBottomOf="@+id/userName"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <EditText
         android:id="@+id/passwordSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
+        android:textSize="15sp"
+        android:textColor="@color/black"
         android:inputType="textPassword"
         app:layout_constraintLeft_toLeftOf="@+id/emailSignUp"
         app:layout_constraintRight_toRightOf="@+id/emailSignUp"
         app:layout_constraintTop_toBottomOf="@+id/emailSignUp"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <EditText
         android:id="@+id/userName"
@@ -79,8 +93,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="51dp"
         android:layout_marginRight="51dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="87dp"
         android:ems="10"
+        android:textSize="15sp"
+        android:textColor="@color/black"
         android:inputType="textPersonName"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -89,15 +105,17 @@
 
     <Button
         android:id="@+id/signUpSubmit"
-        android:layout_width="wrap_content"
+        android:layout_width="375dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="29dp"
-        android:layout_marginStart="29dp"
         android:text="Sign Up"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@+id/passwordSignUp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintBottom_creator="1"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordSignUp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginTop="93dp"
+        app:layout_constraintHorizontal_bias="0.466" />
 </android.support.constraint.ConstraintLayout>
