@@ -1,9 +1,5 @@
 package com.example.sagar.popupshops_buyerside.Shop;
 
-/**
- * Created by Fawad Masood Desmukh on 11/5/2017.
- */
-
 public class Item {
 
     private String itemCategory;
@@ -24,6 +20,10 @@ public class Item {
         this.itemStock = itemStock;
     }
 
+    public static int getAttributeCount() {
+        return 6;
+    }
+
     public int getItemPrice() {
         return itemPrice;
     }
@@ -42,5 +42,16 @@ public class Item {
 
     public int getItemStock() {
         return itemStock;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "itemCategory='" + itemCategory + '\'' +
+                ", itemPrice=" + itemPrice +
+                ", itemDescription='" + itemDescription + '\'' +
+                ", itemImage='" + itemImage + '\'' +
+                ", itemStock=" + itemStock +
+                '}';
     }
 }
