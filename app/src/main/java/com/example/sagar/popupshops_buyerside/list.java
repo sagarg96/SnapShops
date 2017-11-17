@@ -1,8 +1,5 @@
 package com.example.sagar.popupshops_buyerside;
 
-/**
- * Created by Vikram on 14-Oct-17.
- */
 
 public class list {
 

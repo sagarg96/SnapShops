@@ -2,6 +2,7 @@ package com.example.sagar.popupshops_buyerside.Shop;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,7 +47,10 @@ public class vendor_dashboard extends AppCompatActivity {
     LinearLayout setUpLayout;
     LinearLayout dashboardLayout;
     boolean isSetup;
+
+    Button updateLocation;
     Button setLocation;
+
     private static final int REQUEST_CODE_PERMISSION = 2;
     String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
 
@@ -92,7 +97,7 @@ public class vendor_dashboard extends AppCompatActivity {
 
         //dashboard layout buttons
         Button viewItemList = (Button) findViewById(R.id.viewItems);
-        Button updateLocation = (Button) findViewById(R.id.updateLocation); //location button
+        updateLocation = (Button) findViewById(R.id.updateLocation); //location button
         Button closeShop = (Button) findViewById(R.id.closeShop);
         Button addItem = (Button) findViewById(R.id.addItem);
 
@@ -166,9 +171,38 @@ public class vendor_dashboard extends AppCompatActivity {
             }
         });
 
+
+        updateLocation.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                // create class object
+                gps = new GPSTracker(vendor_dashboard.this);
+
+                // check if GPS enabled
+                if(gps.canGetLocation()){
+
+                    latitude = gps.getLatitude();
+                    longitude = gps.getLongitude();
+
+                    // \n is for new line
+                    Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
+                            + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+                }else{
+                    // can't get location
+                    // GPS or Network is not enabled
+                    // Ask user to enable GPS/network in settings
+                    gps.showSettingsAlert();
+                }
+
+            }
+        });
+
         closeShop.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 //change shop status to closed
                 FirebaseUtils.getCurrentShopID(new FirebaseUtils.Callback() {
                     @Override
@@ -180,12 +214,6 @@ public class vendor_dashboard extends AppCompatActivity {
             }
         });
 
-//        setLocation.setOnClickListener(new Button.OnClickListener() {
-//            public void onClick(View view) {
-//                //add location tracking
-//
-//            }
-//        });
 
         setUpShop.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
@@ -376,5 +404,6 @@ public class vendor_dashboard extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 }
