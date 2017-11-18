@@ -333,7 +333,7 @@ public class vendor_dashboard extends AppCompatActivity {
         databaseReference.setValue(newShop);
 
         //create geofire entry
-        DatabaseReference geoRef = FirebaseUtils.getShopsRef();
+        DatabaseReference geoRef = FirebaseUtils.getShopLocationRef();
         GeoFire geofire = new GeoFire(geoRef);
         geofire.setLocation(databaseReference.getKey(), new GeoLocation(latitude, longitude));
 
