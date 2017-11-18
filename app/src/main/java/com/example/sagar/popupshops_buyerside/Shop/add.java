@@ -60,9 +60,9 @@ public class add extends AppCompatActivity {
         setContentView(R.layout.addview);
 
         final ImageButton imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
-        final EditText descriptionInput = (EditText) findViewById(R.id.nameInput);
+        final EditText descriptionInput = (EditText) findViewById(R.id.descriptionInput);
         final EditText priceInput = (EditText) findViewById(R.id.priceInput);
-        final EditText stockInput = (EditText) findViewById(R.id.itemStockInput);
+        final EditText stockInput = (EditText) findViewById(R.id.stockInput);
         final Button attachButton = (Button) findViewById(R.id.attachButton);
         final Button upload = (Button) findViewById(R.id.uploadButton);
 
@@ -89,7 +89,7 @@ public class add extends AppCompatActivity {
             }
         });
 
-        final AutoCompleteTextView categoryInput = (AutoCompleteTextView) findViewById(R.id.categoryinput);
+        final AutoCompleteTextView categoryInput = (AutoCompleteTextView) findViewById(R.id.categoryInput);
         categoryInput.setAdapter(suggest(this));
 
         upload.setOnClickListener(new Button.OnClickListener() {
@@ -100,7 +100,7 @@ public class add extends AppCompatActivity {
                 final String stockString = stockInput.getText().toString();
                 final DatabaseReference dbRef = database.getReference("item").push();
 
-                if (priceString.length() != 0 && description.length() != 0 && categoryString.length() != 0 && imageUrl != null) {
+                if (priceString.length() != 0 && description.length() != 0 && categoryString.length() != 0 && stockString.length() !=0 && imageUrl != null) {
                     String itemID = dbRef.getKey();
                     storageRef.child("images/" + itemID + ".png").putFile(imageUrl)
                             .addOnFailureListener(new OnFailureListener() {
@@ -113,7 +113,7 @@ public class add extends AppCompatActivity {
                                                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                                             dbRef.setValue(
                                                                     new Item(
-                                                                            categoryString, Integer.parseInt(priceString), description, taskSnapshot.getMetadata().getDownloadUrl().toString(), Integer.parseInt(stockString)
+                                                                            categoryString, Float.parseFloat(priceString), description, taskSnapshot.getMetadata().getDownloadUrl().toString(), Integer.parseInt(stockString)
                                                                     )
                                                             );
                                                             //add shop id to item record
@@ -134,8 +134,8 @@ public class add extends AppCompatActivity {
                                                                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                                                                     if (dataSnapshot.hasChild(FirebaseEndpoint.SHOPS.LOCATION)) {
                                                                                         Log.w(TAG, dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).getValue().toString());
-                                                                                        double latitude = (double) dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("latitude").getValue();
-                                                                                        double longitude = (double) dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("longitude").getValue();
+                                                                                        double latitude = (Long) dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("latitude").getValue();
+                                                                                        double longitude = (Long) dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("longitude").getValue();
                                                                                         DatabaseReference geoRef = FirebaseUtils.getBaseRef().child("item_location");
                                                                                         GeoFire geofire = new GeoFire(geoRef);
                                                                                         geofire.setLocation(dbRef.getKey(), new GeoLocation(latitude, longitude));
@@ -167,6 +167,9 @@ public class add extends AppCompatActivity {
                                                         }
                                                     }
                     );
+                }
+                else {
+                    Toast.makeText(add.this, "Please input all fields and attach an image", Toast.LENGTH_LONG).show();
                 }
             }
         });
