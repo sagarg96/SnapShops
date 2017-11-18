@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_bg"
+    tools:context="com.example.sagar.popupshops_buyerside.Registration.LaunchActivity">
+
+    <!--android:background="@drawable/bg2"-->
+
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="102dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="71dp"
+        android:src="@drawable/pop_up_shop_logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="375dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="47dp"
+        android:background="@color/colorPrimary"
+        android:text="Login"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/signupButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="@+id/signupButton"
+        app:layout_constraintRight_toRightOf="@+id/signupButton"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1" />
+
+    <Button
+        android:id="@+id/signupButton"
+        android:layout_width="375dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="174dp"
+        android:height="@android:dimen/notification_large_icon_height"
+        android:background="@null"
+        android:text="Sign Up"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1" />
+
+</android.support.constraint.ConstraintLayout>

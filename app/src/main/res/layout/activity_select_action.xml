@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sagar.popupshops_buyerside.SelectActionActivity">
+
+    <Button
+        android:id="@+id/logOutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginTop="-19dp" />
+
+
+    <Button
+        android:id="@+id/buyButton"
+        android:layout_width="375dp"
+        android:layout_height="200dp"
+        android:background="@color/colorPrimary"
+        android:text="Go Shopping"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logOutButton"
+        android:layout_marginTop="-94dp"
+        app:layout_constraintHorizontal_bias="0.466" />
+
+    <Button
+        android:id="@+id/sellButton"
+        android:layout_width="375dp"
+        android:layout_height="200dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/buyButton"
+        android:text="My Pop Up Shop"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="18sp"
+        android:layout_marginTop="34dp"
+        app:layout_constraintHorizontal_bias="0.466" />
+</android.support.constraint.ConstraintLayout>
