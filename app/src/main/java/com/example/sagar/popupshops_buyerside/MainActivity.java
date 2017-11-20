@@ -3,7 +3,9 @@ package com.example.sagar.popupshops_buyerside;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -15,27 +17,55 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.sagar.popupshops_buyerside.Registration.GPSTracker;
 import com.example.sagar.popupshops_buyerside.Registration.LaunchActivity;
 import com.example.sagar.popupshops_buyerside.Shop.Item;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
+import com.firebase.geofire.GeoQuery;
+import com.firebase.geofire.GeoQueryEventListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_PERMISSION = 2;
     private final String TAG = "MainActivity";
+    String mPermission = android.Manifest.permission.ACCESS_FINE_LOCATION;
+    // GPSTracker class
+    GPSTracker gps;
+    //location coordinates
+    double latitude;
+    double longitude;
+    double radius = 0.5;
     private SwipePlaceHolderView mSwipeView;
     private Context mContext;
+    private GeoFire geoFire;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        geoFire = new GeoFire(FirebaseUtils.getItemLocationRef());
+
+        //Location Permissions
+        try {
+            if (ActivityCompat.checkSelfPermission(this, mPermission) != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(this, new String[]{mPermission},
+                        REQUEST_CODE_PERMISSION);
+
+                // If any permission above not allowed by user, this condition will execute every time, else your else part will work
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //button change to tab later
         Button near_me_tab = (Button) findViewById(R.id.near_me_tab);
@@ -50,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
+        Spinner dropdown = (Spinner) findViewById(R.id.spinner1);
         String[] items = new String[]{"1", "2", "three"}; //TODO: GET FROM DB
 
 
@@ -72,41 +102,97 @@ public class MainActivity extends AppCompatActivity {
                         .setSwipeOutMsgLayoutId(R.layout.tinder_swipe_out_msg_view));
 
 
-        ChildEventListener itemEventListener = new ChildEventListener() {
+    }
+
+
+    @Override
+    protected void onStart() {
+
+        super.onStart();
+
+        setLocationAttributes();
+
+
+        GeoQuery itemLocationQuery = geoFire.queryAtLocation(new GeoLocation(latitude, longitude), radius);
+        itemLocationQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.d("TAG", "onChildAdded:" + dataSnapshot.getKey());
-                Item item = dataSnapshot.getValue(Item.class);
-                mSwipeView.addView(new ItemCard(mContext, item, mSwipeView));
+            public void onKeyEntered(String key, GeoLocation location) {
+                Query itemQuery = FirebaseUtils.getItemLocationRef().equalTo(key);
+                itemQuery.addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
+                        Item item = dataSnapshot.getValue(Item.class);
+                        mSwipeView.addView(new ItemCard(mContext, item, mSwipeView));
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            public void onKeyExited(String key) {
 
             }
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            public void onKeyMoved(String key, GeoLocation location) {
 
             }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            public void onGeoQueryReady() {
 
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onGeoQueryError(DatabaseError error) {
 
             }
-        };
+        });
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference itemRef = database.getReference("item");
 
-        itemRef.addChildEventListener(itemEventListener);
+    }
 
-}
+    private void setLocationAttributes() {
+        // create class object
+
+        gps = new GPSTracker(MainActivity.this);
+
+        // check if GPS enabled
+        if (gps.canGetLocation()) {
+
+            latitude = gps.getLatitude();
+            longitude = gps.getLongitude();
+            Log.w(TAG, "location being set: lat " + latitude + " long: " + longitude);
+
+//
+        } else {
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+            gps.showSettingsAlert();
+        }
+    }
 
 
     @Override
