@@ -7,6 +7,7 @@ public class Item {
     private String itemDescription;
     private String itemImage;
     private int itemStock;
+    private String shopID;
 
     public Item() {
 

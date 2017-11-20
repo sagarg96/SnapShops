@@ -134,8 +134,8 @@ public class add extends AppCompatActivity {
                                                                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                                                                     if (dataSnapshot.hasChild(FirebaseEndpoint.SHOPS.LOCATION)) {
                                                                                         Log.w(TAG, dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).getValue().toString());
-                                                                                        double latitude = (Long) dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("latitude").getValue();
-                                                                                        double longitude = (Long) dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("longitude").getValue();
+                                                                                        double latitude = (double) dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("latitude").getValue();
+                                                                                        double longitude = (double) dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("longitude").getValue();
                                                                                         DatabaseReference geoRef = FirebaseUtils.getBaseRef().child("item_location");
                                                                                         GeoFire geofire = new GeoFire(geoRef);
                                                                                         geofire.setLocation(dbRef.getKey(), new GeoLocation(latitude, longitude));
@@ -171,6 +171,9 @@ public class add extends AppCompatActivity {
                 else {
                     Toast.makeText(add.this, "Please input all fields and attach an image", Toast.LENGTH_LONG).show();
                 }
+
+                Intent intent = new Intent(add.this, vendor_dashboard.class);
+                startActivity(intent);
             }
         });
     }

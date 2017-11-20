@@ -176,7 +176,6 @@ public class vendor_dashboard extends AppCompatActivity {
                     }
                 });
 
-                //TODO update location in shopLocationTree
                 FirebaseUtils.getCurrentShopID(new FirebaseUtils.Callback() {
                     @Override
                     public void OnComplete(String value) {
@@ -187,7 +186,6 @@ public class vendor_dashboard extends AppCompatActivity {
                     }
                 });
 
-                //TODO update location of corresponding items
                 FirebaseUtils.getCurrentShopID(new FirebaseUtils.Callback() {
                     @Override
                     public void OnComplete(String value) {

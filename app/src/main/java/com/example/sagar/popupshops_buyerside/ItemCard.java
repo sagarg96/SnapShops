@@ -49,7 +49,7 @@ public class ItemCard {
     @SwipeOut
     private void onSwipedOut(){
         Log.d("EVENT", "onSwipedOut");
-        mSwipeView.addView(this);
+        //mSwipeView.addView(this);
     }
 
     @SwipeCancelState
