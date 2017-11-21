@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         setLocationAttributes();
 
 
-        GeoQuery itemLocationQuery = geoFire.queryAtLocation(new GeoLocation(latitude, longitude), radius);
+        GeoQuery itemLocationQuery = geoFire.queryAtLocation(new GeoLocation(latitude, longitude), 2);
         itemLocationQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
