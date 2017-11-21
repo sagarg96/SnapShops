@@ -173,6 +173,7 @@ public class add extends AppCompatActivity {
                 }
 
                 Intent intent = new Intent(add.this, vendor_dashboard.class);
+                intent.putExtra("setup", false);
                 startActivity(intent);
             }
         });
