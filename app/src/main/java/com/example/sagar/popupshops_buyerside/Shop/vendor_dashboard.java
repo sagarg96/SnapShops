@@ -99,7 +99,7 @@ public class vendor_dashboard extends AppCompatActivity {
         //dashboard layout buttons
         Button viewItemList = (Button) findViewById(R.id.viewItems);
         updateLocation = (Button) findViewById(R.id.updateLocation); //location button
-        Button closeShop = (Button) findViewById(R.id.closeShop);
+        final Button updateShopStatus = (Button) findViewById(R.id.closeShop);
         Button addItem = (Button) findViewById(R.id.addItem);
 
         //setup layout buttons
@@ -229,7 +229,7 @@ public class vendor_dashboard extends AppCompatActivity {
             }
         });
 
-        closeShop.setOnClickListener(new Button.OnClickListener() {
+        updateShopStatus.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -237,9 +237,29 @@ public class vendor_dashboard extends AppCompatActivity {
                 FirebaseUtils.getCurrentShopID(new FirebaseUtils.Callback() {
                     @Override
                     public void OnComplete(String value) {
-                        DatabaseReference databaseReference = FirebaseUtils.getShopsRef().child(value).child(FirebaseEndpoint.SHOPS.SHOPSTATUS);
+                        Log.w(TAG, "updateShopStatus -> " + value);
+                        final DatabaseReference shopStatusRef = FirebaseUtils.getShopsRef().child(value).child(FirebaseEndpoint.SHOPS.SHOPSTATUS);
+                        shopStatusRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                Log.w(TAG, "updateShopStatus ->" + dataSnapshot.getValue().toString());
+                                if (dataSnapshot.getValue().toString().equals(ShopStatus.CLOSED.name())) {
+                                    shopStatusRef.setValue(ShopStatus.OPEN);
+                                    updateShopStatus.setText("Close Shop");
 
-                        databaseReference.setValue(ShopStatus.CLOSED);
+                                } else if (dataSnapshot.getValue().toString().equals(ShopStatus.OPEN.name())) {
+                                    Log.w(TAG, "updateShopStatus2 ->" + dataSnapshot.getValue().toString());
+                                    updateShopStatus.setText("Open Shop");
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+
                     }
                 });
             }
