@@ -135,7 +135,7 @@ public class vendor_dashboard extends AppCompatActivity {
         viewItemList.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(vendor_dashboard.this, recycle.class);
-
+                intent.putExtra("shopID", "self");
                 startActivity(intent);
             }
         });
