@@ -1,6 +1,7 @@
 package com.example.sagar.popupshops_buyerside;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.sagar.popupshops_buyerside.Shop.Item;
+import com.example.sagar.popupshops_buyerside.Shop.recycle;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 import com.google.firebase.database.DataSnapshot;
@@ -31,7 +33,7 @@ public class ItemCard {
     private ImageView profileImageView;
 
     @View(R.id.nameAgeTxt)
-    private TextView nameAgeTxt;
+    private TextView itemDetail;
 
     @View(R.id.shopName)
     private Button shopName;
@@ -47,20 +49,27 @@ public class ItemCard {
     }
 
     @Resolve
-    private void onResolved(){
+    private void onResolved() {
         Glide.with(mContext).load(mItem.getItemImage()).into(profileImageView);
-        nameAgeTxt.setText(mItem.getItemDescription() + ", $" + mItem.getItemPrice());
+        itemDetail.setText(mItem.getItemDescription() + ", $" + mItem.getItemPrice());
         DatabaseReference shopReference = FirebaseUtils.getShopsRef().child(mItem.getShopID()).child(FirebaseEndpoint.SHOPS.SHOPNAME);
+        Log.w("here", mItem.getShopID());
         shopReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                shopName.setText(dataSnapshot.getValue().toString());
-                shopName.setOnClickListener(new Button.OnClickListener() {
-                    @Override
-                    public void onClick(android.view.View view) {
+                Log.w("here", dataSnapshot.exists() + "");
+                if (dataSnapshot.exists()) {
+                    shopName.setText(dataSnapshot.getValue().toString());
+                    shopName.setOnClickListener(new Button.OnClickListener() {
+                        @Override
+                        public void onClick(android.view.View view) {
+                            Intent intent = new Intent(mContext, recycle.class);
+                            intent.putExtra("shopID", mItem.getShopID());
+                            mContext.startActivity(intent);
+                        }
+                    });
+                }
 
-                    }
-                });
             }
 
             @Override
@@ -71,28 +80,28 @@ public class ItemCard {
     }
 
     @SwipeOut
-    private void onSwipedOut(){
+    private void onSwipedOut() {
         Log.d("EVENT", "onSwipedOut");
         //mSwipeView.addView(this);
     }
 
     @SwipeCancelState
-    private void onSwipeCancelState(){
+    private void onSwipeCancelState() {
         Log.d("EVENT", "onSwipeCancelState");
     }
 
     @SwipeIn
-    private void onSwipeIn(){
+    private void onSwipeIn() {
         Log.d("EVENT", "onSwipedIn");
     }
 
     @SwipeInState
-    private void onSwipeInState(){
+    private void onSwipeInState() {
         Log.d("EVENT", "onSwipeInState");
     }
 
     @SwipeOutState
-    private void onSwipeOutState(){
+    private void onSwipeOutState() {
         Log.d("EVENT", "onSwipeOutState");
     }
 }
