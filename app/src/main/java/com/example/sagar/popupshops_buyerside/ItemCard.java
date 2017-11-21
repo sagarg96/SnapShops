@@ -2,11 +2,18 @@ package com.example.sagar.popupshops_buyerside;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.sagar.popupshops_buyerside.Shop.Item;
+import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
+import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.Resolve;
@@ -26,8 +33,8 @@ public class ItemCard {
     @View(R.id.nameAgeTxt)
     private TextView nameAgeTxt;
 
-//    @View(R.id.locationNameTxt)
-//    private Button locationNameTxt;
+    @View(R.id.shopName)
+    private Button shopName;
 
     private Item mItem;
     private Context mContext;
@@ -43,7 +50,24 @@ public class ItemCard {
     private void onResolved(){
         Glide.with(mContext).load(mItem.getItemImage()).into(profileImageView);
         nameAgeTxt.setText(mItem.getItemDescription() + ", $" + mItem.getItemPrice());
-//        locationNameTxt.setText(mProfile.getLocation());
+        DatabaseReference shopReference = FirebaseUtils.getShopsRef().child(mItem.getShopID()).child(FirebaseEndpoint.SHOPS.SHOPNAME);
+        shopReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                shopName.setText(dataSnapshot.getValue().toString());
+                shopName.setOnClickListener(new Button.OnClickListener() {
+                    @Override
+                    public void onClick(android.view.View view) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @SwipeOut

@@ -45,6 +45,10 @@ public class Item {
         return itemStock;
     }
 
+    public String getShopID() {
+        return shopID;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
