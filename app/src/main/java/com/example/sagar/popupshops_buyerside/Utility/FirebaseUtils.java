@@ -31,6 +31,10 @@ public class FirebaseUtils {
         return getBaseRef().child(FirebaseEndpoint.ROOTS.ITEM);
     }
 
+    public static DatabaseReference getCategoryRef() {
+        return getBaseRef().child(FirebaseEndpoint.ROOTS.CATEGORY);
+    }
+
     public static DatabaseReference getShopLocationRef() {
         return getBaseRef().child(FirebaseEndpoint.ROOTS.SHOP_LOCATION);
     }
