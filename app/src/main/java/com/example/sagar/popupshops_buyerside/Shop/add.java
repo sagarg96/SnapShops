@@ -97,22 +97,24 @@ public class add extends AppCompatActivity {
         });
 
         final AutoCompleteTextView categoryInput = (AutoCompleteTextView) findViewById(R.id.categoryInput);
-        categoryInput.setAdapter(suggest(this));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, new String[]{});
+        categoryInput.setAdapter(adapter);
+        categoryInput.setThreshold(1);
 
-//        categoryRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                HashMap<String, String> categoryHashMap = (HashMap<String, String>) dataSnapshot.getValue();
-//                ArrayAdapter<String> = new ArrayAdapter<String>()
-//                ArrayAdapter<String> adapter = new ArrayAdapter<String>(categoryHashMap.values());
-////                String[] values = categoryHashMap.values();
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                System.out.println("The read failed: " + databaseError.getCode());
-//            }
-//        });
+        categoryRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                HashMap<String, String> categoryHashMap = (HashMap<String, String>) dataSnapshot.getValue();
+                String[] categoryValues = categoryHashMap.values().toArray(new String[categoryHashMap.size()]);
+                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, categoryValues);
+                categoryInput.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
 
         upload.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
@@ -265,16 +267,6 @@ public class add extends AppCompatActivity {
             imageButton.setImageURI(imageUrl);
         }
     }
-
-    private ArrayAdapter<String> suggest(Context context) {
-        String[] suggestions = {"General", "Bags", "Books", "back"};
-        String[] addresses = new String[suggestions.length];
-        for (int i = 0; i < suggestions.length; i++) {
-            addresses[i] = suggestions[i];
-        }
-        return new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, addresses);
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
