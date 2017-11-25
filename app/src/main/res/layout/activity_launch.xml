@@ -28,7 +28,6 @@
         android:layout_width="375dp"
         android:layout_height="70dp"
         android:layout_marginBottom="47dp"
-        android:background="@color/colorPrimary"
         android:text="Login"
         android:textSize="18dp"
         android:textColor="@color/black"
