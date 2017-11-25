@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_bg"
     tools:context="com.example.sagar.popupshops_buyerside.Registration.LaunchActivity">
 
     <!--android:background="@drawable/bg2"-->
+
+    <!--android:background="@drawable/ic_bg"-->
 
 
     <ImageView
@@ -28,10 +29,10 @@
         android:layout_width="375dp"
         android:layout_height="70dp"
         android:layout_marginBottom="47dp"
-        android:text="Login"
-        android:textSize="18dp"
-        android:textColor="@color/black"
         android:background="@null"
+        android:text="Login"
+        android:textColor="@color/black"
+        android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/signupButton"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="@+id/signupButton"

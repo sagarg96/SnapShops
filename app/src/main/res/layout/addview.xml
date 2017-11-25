@@ -1,96 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageButton
         android:id="@+id/imageButton1"
-        style="@android:style/Widget.Holo.ImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="53dp"
-        android:adjustViewBounds="false"
-        android:scaleX="2."
-        android:scaleY="2"
-        app:srcCompat="@mipmap/ic_launcher" />
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:scaleType="centerInside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_menu_camera" />
 
     <Button
         android:id="@+id/attachButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageButton1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp"
+        android:layout_marginTop="20dp"
         android:text="Attach Image"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton1" />
 
-    <Button
-        android:id="@+id/uploadButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/priceInput"
-        android:layout_alignLeft="@+id/priceInput"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/priceInput"
-        android:layout_alignStart="@+id/priceInput"
-        android:layout_marginBottom="31dp"
-        android:text="upload"
-        app:layout_constraintTop_toBottomOf="@+id/categoryinput" />
-
     <EditText
-        android:id="@+id/nameInput"
+        android:id="@+id/descriptionInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/attachButton"
-        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="description"
         android:inputType="textPersonName"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/attachButton" />
 
     <EditText
         android:id="@+id/priceInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/nameInput"
-        android:layout_alignStart="@+id/nameInput"
-        android:layout_below="@+id/nameInput"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="price"
         android:inputType="numberDecimal"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameInput" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionInput" />
 
     <EditText
-        android:id="@+id/itemStockInput"
+        android:id="@+id/stockInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/priceInput"
-        android:layout_alignStart="@+id/priceInput"
-        android:layout_below="@+id/priceInput"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="stock"
-        android:inputType="text"
+        android:inputType="number"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/priceInput" />
 
-    <AutoCompleteTextView
-        android:id="@+id/categoryinput"
+    <Button
+        android:id="@+id/uploadButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/itemStockInput"
-        android:layout_alignStart="@+id/itemStockInput"
-        android:layout_below="@+id/itemStockInput"
-        android:layout_marginTop="17dp"
-        android:ems="10"
+        android:layout_height="46dp"
+        android:layout_marginTop="10dp"
+        android:text="Upload"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categoryInput" />
+
+    <AutoCompleteTextView
+        android:id="@+id/categoryInput"
+        android:layout_width="217dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
         android:hint="category"
         android:maxLength="25"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemStockInput" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stockInput" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -3,16 +3,17 @@ package com.example.sagar.popupshops_buyerside.Shop;
 public class Item {
 
     private String itemCategory;
-    private int itemPrice;
+    private float itemPrice;
     private String itemDescription;
     private String itemImage;
     private int itemStock;
+    private String shopID;
 
     public Item() {
 
     }
 
-    public Item(String itemCategory, int itemPrice, String itemDescription, String itemImage, int itemStock) {
+    public Item(String itemCategory, float itemPrice, String itemDescription, String itemImage, int itemStock) {
         this.itemCategory = itemCategory;
         this.itemPrice = itemPrice;
         this.itemDescription = itemDescription;
@@ -24,7 +25,7 @@ public class Item {
         return 6;
     }
 
-    public int getItemPrice() {
+    public float getItemPrice() {
         return itemPrice;
     }
 
@@ -42,6 +43,10 @@ public class Item {
 
     public int getItemStock() {
         return itemStock;
+    }
+
+    public String getShopID() {
+        return shopID;
     }
 
     @Override

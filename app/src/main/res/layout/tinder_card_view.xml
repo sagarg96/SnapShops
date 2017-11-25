@@ -7,33 +7,33 @@
     android:layout_marginBottom="50dp"
     android:orientation="vertical">
     <android.support.v7.widget.CardView
-        android:orientation="vertical"
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
+        android:background="@color/white"
+        android:orientation="vertical"
         app:cardCornerRadius="7dp"
         app:cardElevation="4dp">
         <ImageView
             android:id="@+id/profileImageView"
-            android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="75dp"/>
+            android:layout_marginBottom="75dp"
+            android:scaleType="centerCrop" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:orientation="vertical"
             android:layout_gravity="bottom"
             android:gravity="center|left"
+            android:orientation="vertical"
             android:paddingLeft="20dp">
             <TextView
                 android:id="@+id/nameAgeTxt"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_height="wrap_content"/>
+                android:textStyle="bold" />
 
             <!--
             <TextView
@@ -46,7 +46,7 @@
 
                -->
             <Button
-                android:id="@+id/locationNameTxt"
+                android:id="@+id/shopName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
