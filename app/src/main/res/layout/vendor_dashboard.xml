@@ -41,6 +41,7 @@
         tools:layout_constraintRight_creator="1" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="181dp"
         android:layout_marginBottom="70dp"
@@ -62,8 +63,7 @@
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        android:id="@+id/linearLayout">
+        tools:layout_constraintTop_creator="1">
 
         <LinearLayout
             android:id="@+id/dashboardLayout"
@@ -84,6 +84,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add Item"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <Button
+                android:id="@+id/updateLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update Location"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent" />
 
@@ -130,29 +138,20 @@
             tools:layout_constraintTop_creator="1">
 
             <Button
-                android:id="@+id/setUpSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Set Up Shop!" />
-
-            <Button
                 android:id="@+id/setUpLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Set Location"
                 app:layout_constraintTop_toBottomOf="@+id/setUpSubmit" />
+
+            <Button
+                android:id="@+id/setUpSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Set Up Shop!" />
+
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/updateLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Update Location"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.sagar.popupshops_buyerside;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +9,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.sagar.popupshops_buyerside.Registration.LaunchActivity;
 import com.example.sagar.popupshops_buyerside.Shop.Item;
@@ -39,14 +42,18 @@ public class MainActivity extends AppCompatActivity {
 
         near_me_tab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, Near_me.class);
-                MainActivity.this.startActivity(myIntent);
+
+                showAlertbox("Yolo");
+//                Intent myIntent = new Intent(MainActivity.this, Near_me.class);
+//                MainActivity.this.startActivity(myIntent);
 
             }
         });
 
         Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
-        String[] items = new String[]{"1", "2", "three"};
+        String[] items = new String[]{"1", "2", "three"}; //TODO: GET FROM DB
+
+
         //create an adapter to describe how the items are displayed, adapters are used in several places in android.
         //There are multiple variations of this, but this is the basic variant.
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -127,6 +134,36 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void showAlertbox(String title) {
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activity_popup_scroll);
+        dialog.setCanceledOnTouchOutside(false);
+        TextView alertbox_title = (TextView) dialog
+                .findViewById(R.id.alertbox_title);
+        alertbox_title.setText(title);
+
+        Button yes = (Button) dialog.findViewById(R.id.alertbox_yes);
+        Button no = (Button) dialog.findViewById(R.id.alertbox_no);
+
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //code the functionality when YES button is clicked
+            }
+        });
+
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //code the functionality when NO button is clicked
+            }
+        });
+
+        dialog.show();
     }
 }
 
