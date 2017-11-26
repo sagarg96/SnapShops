@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.sagar.popupshops_buyerside.Registration.LaunchActivity;
 import com.example.sagar.popupshops_buyerside.Shop.vendor_dashboard;
@@ -26,9 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class SelectActionActivity extends AppCompatActivity {
 
-    Button logOutButton;
-    Button buyButton;
-    Button sellButton;
+    ImageButton buyButton;
+    ImageButton sellButton;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -38,21 +38,12 @@ public class SelectActionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_action);
 
-        logOutButton = (Button) findViewById(R.id.logOutButton);
-        buyButton = (Button) findViewById(R.id.buyButton);
-        sellButton = (Button) findViewById(R.id.sellButton);
+        buyButton = (ImageButton) findViewById(R.id.buyButton);
+        sellButton = (ImageButton) findViewById(R.id.sellButton);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mAuth = FirebaseAuth.getInstance();
 
-        logOutButton.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAuth.signOut();
-                Intent intent = new Intent(SelectActionActivity.this, LaunchActivity.class);
-                startActivity(intent);
-            }
-        });
 
         buyButton.setOnClickListener(new Button.OnClickListener() {
             @Override

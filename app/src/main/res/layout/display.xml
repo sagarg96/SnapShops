@@ -44,16 +44,14 @@
             android:layout_height="wrap_content" />
 
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:backgroundTint="#FF0000"
-            android:clickable="true"
-            android:scaleX="0.5"
-            android:scaleY="0.5" />
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_marginLeft="300sp"
+            android:layout_marginStart="300sp"
+            android:src="@drawable/ic_cancel" />
+
 
 
     </LinearLayout>

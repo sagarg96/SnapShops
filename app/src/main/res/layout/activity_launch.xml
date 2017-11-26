@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context="com.example.sagar.popupshops_buyerside.Registration.LaunchActivity">
 
     <!--android:background="@drawable/bg2"-->
@@ -15,9 +16,8 @@
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="102dp"
-        android:layout_marginStart="102dp"
-        android:layout_marginTop="71dp"
+        android:layout_marginLeft="96dp"
+        android:layout_marginTop="68dp"
         android:src="@drawable/pop_up_shop_logo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,13 +26,13 @@
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="375dp"
+        android:layout_width="175dp"
         android:layout_height="70dp"
         android:layout_marginBottom="47dp"
         android:background="@null"
         android:text="Login"
         android:textColor="@color/black"
-        android:textSize="18dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/signupButton"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="@+id/signupButton"
@@ -43,14 +43,14 @@
 
     <Button
         android:id="@+id/signupButton"
-        android:layout_width="375dp"
+        android:layout_width="175dp"
         android:layout_height="70dp"
         android:layout_marginTop="174dp"
         android:height="@android:dimen/notification_large_icon_height"
         android:background="@null"
         android:text="Sign Up"
         android:textColor="@color/black"
-        android:textSize="18dp"
+        android:textSize="20sp"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

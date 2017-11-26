@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context="com.example.sagar.popupshops_buyerside.Shop.vendor_dashboard">
 
     <EditText
@@ -12,6 +13,7 @@
         android:layout_height="60dp"
         android:layout_marginEnd="30dp"
         android:layout_marginLeft="30dp"
+        android:textSize="15sp"
         android:layout_marginRight="30dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="44dp"
@@ -31,6 +33,7 @@
         android:layout_marginLeft="31dp"
         android:layout_marginRight="31dp"
         android:layout_marginStart="31dp"
+        android:textSize="15sp"
         android:layout_marginTop="35dp"
         android:hint="Shop Name"
         android:inputType="text"
@@ -42,20 +45,17 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="181dp"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
         android:layout_marginBottom="70dp"
-        android:layout_marginEnd="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginStart="5dp"
         android:layout_marginTop="71dp"
         android:clickable="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shopDescr"
@@ -67,14 +67,13 @@
 
         <LinearLayout
             android:id="@+id/dashboardLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:weightSum="1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/shopDescr"
             tools:layout_constraintLeft_creator="1"
             tools:layout_constraintRight_creator="1"
             tools:layout_constraintTop_creator="1">
@@ -83,29 +82,34 @@
                 android:id="@+id/addItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@null"
                 android:text="Add Item"
-                app:layout_constraintBottom_toTopOf="@+id/viewItems"
+                android:textColor="@color/black"
+                android:textSize="15sp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/dashboardLayout" />
+                app:layout_constraintRight_toRightOf="parent" />
 
             <Button
                 android:id="@+id/updateLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:background="@null"
                 android:text="Update Location"
+                android:textColor="@color/black"
+                android:textSize="15sp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewItems" />
+                app:layout_constraintRight_toRightOf="parent" />
 
             <Button
                 android:id="@+id/viewItems"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:background="@null"
                 android:text="View Current Items"
-                app:layout_constraintBottom_toTopOf="@+id/closeShop"
+                android:textColor="@color/black"
+                android:textSize="15sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/addItem" />
@@ -116,9 +120,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Close Shop"
+                android:background="@null"
+
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/updateLocation" />
+                app:layout_constraintTop_toBottomOf="@+id/viewItems" />
 
         </LinearLayout>
 
@@ -146,15 +152,20 @@
                 android:id="@+id/setUpLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:background="@null"
                 android:text="Set Location"
+                android:textColor="@color/black"
+                android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/setUpSubmit" />
 
             <Button
                 android:id="@+id/setUpSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Set Up Shop!" />
+                android:background="@null"
+                android:text="Set Up Shop!"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
         </LinearLayout>
     </LinearLayout>
