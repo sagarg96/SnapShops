@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.sagar.popupshops_buyerside.Registration.GPSTracker;
 import com.example.sagar.popupshops_buyerside.Registration.LaunchActivity;
 import com.example.sagar.popupshops_buyerside.Shop.Item;
+import com.example.sagar.popupshops_buyerside.Shop.ShopProfile;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -171,13 +172,26 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
-                        Item item = dataSnapshot.getValue(Item.class);
+                        final Item item = dataSnapshot.getValue(Item.class);
                         final Spinner dropdown = (Spinner) findViewById(R.id.spinner1);
-                        items.add(item);
-                        String selectedItem = dropdown.getSelectedItem().toString();
-                        if(selectedItem == "All" || (item.getItemCategory() != null && item.getItemCategory().equals(selectedItem))){
-                            mSwipeView.addView(new ItemCard(mContext, item, mSwipeView));
-                        }
+                        Query shopQuery = FirebaseUtils.getShopsRef().child(item.getShopID());
+                        shopQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                ShopProfile shop = dataSnapshot.getValue(ShopProfile.class);
+                                if(shop.getShopStatus().name().equals("OPEN")){
+                                    items.add(item);
+                                    String selectedItem = dropdown.getSelectedItem().toString();
+                                    if(selectedItem == "All" || (item.getItemCategory() != null && item.getItemCategory().equals(selectedItem))){
+                                        mSwipeView.addView(new ItemCard(mContext, item, mSwipeView));
+                                    }
+                                }
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                     }
 
                     @Override
