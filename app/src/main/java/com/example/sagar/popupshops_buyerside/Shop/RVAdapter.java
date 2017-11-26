@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.sagar.popupshops_buyerside.R;
+import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 
 import java.util.List;
 
@@ -36,7 +38,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ItemViewHolder itemViewHolder, int position) {
+    public void onBindViewHolder(final ItemViewHolder itemViewHolder, int position) {
         itemViewHolder.itemPrice.setText(String.valueOf(itemList.get(position).getItemPrice()));
         itemViewHolder.itemDescr.setText(itemList.get(position).getItemDescription());
         itemViewHolder.itemCategory.setText(itemList.get(position).getItemCategory());
@@ -46,7 +48,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
         itemViewHolder.deleteButton.setOnClickListener(new FloatingActionButton.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO add deletion mechanism
+                Log.w("here", "" + itemViewHolder.getAdapterPosition());
+                FirebaseUtils.getItemRef().child(itemList.get(itemViewHolder.getAdapterPosition()).getItemID()).setValue(null);
+
             }
         });
     }
