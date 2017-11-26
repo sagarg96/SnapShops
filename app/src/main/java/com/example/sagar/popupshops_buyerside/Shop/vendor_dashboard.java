@@ -242,13 +242,14 @@ public class vendor_dashboard extends AppCompatActivity {
                         shopStatusRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                Log.w(TAG, "updateShopStatus ->" + dataSnapshot.getValue().toString());
+                                Log.w(TAG, "updateShopStatus h ->" + dataSnapshot.getValue().toString());
                                 if (dataSnapshot.getValue().toString().equals(ShopStatus.CLOSED.name())) {
                                     shopStatusRef.setValue(ShopStatus.OPEN);
                                     updateShopStatus.setText("Close Shop");
 
                                 } else if (dataSnapshot.getValue().toString().equals(ShopStatus.OPEN.name())) {
                                     Log.w(TAG, "updateShopStatus2 ->" + dataSnapshot.getValue().toString());
+                                    shopStatusRef.setValue(ShopStatus.CLOSED);
                                     updateShopStatus.setText("Open Shop");
                                 }
                             }

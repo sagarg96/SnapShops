@@ -7,9 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.sagar.popupshops_buyerside.R;
 
 import java.util.List;
@@ -38,7 +40,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
         itemViewHolder.itemPrice.setText(String.valueOf(itemList.get(position).getItemPrice()));
         itemViewHolder.itemDescr.setText(itemList.get(position).getItemDescription());
         itemViewHolder.itemCategory.setText(itemList.get(position).getItemCategory());
-        itemViewHolder.itemImage.setImageURI(Uri.parse(itemList.get(position).getItemImage()));
+       // itemViewHolder.itemImage.setImageURI(Uri.parse(itemList.get(position).getItemImage()));
+        Glide.with(itemViewHolder.itemImage.getContext()).load(itemList.get(position).getItemImage()).into(itemViewHolder.itemImage);
+
         itemViewHolder.deleteButton.setOnClickListener(new FloatingActionButton.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +63,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
         TextView itemCategory;
         TextView itemPrice;
         ImageView itemImage;
-        FloatingActionButton deleteButton;
+        ImageButton deleteButton;
 
         ItemViewHolder(View itemView) {
             super(itemView);
@@ -68,7 +72,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
             itemCategory = (TextView) itemView.findViewById(R.id.itemCateg);
             itemPrice = (TextView) itemView.findViewById(R.id.itemPrice);
             itemImage = (ImageView) itemView.findViewById(R.id.itemImage);
-            deleteButton = itemView.findViewById(R.id.fab);
+            deleteButton = itemView.findViewById(R.id.deleteButton);
         }
     }
 }

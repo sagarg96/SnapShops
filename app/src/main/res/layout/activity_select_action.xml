@@ -4,47 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context="com.example.sagar.popupshops_buyerside.SelectActionActivity">
 
-    <Button
-        android:id="@+id/logOutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Log Out"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="-19dp" />
 
-
-    <Button
+    <ImageButton
         android:id="@+id/buyButton"
         android:layout_width="375dp"
         android:layout_height="200dp"
-        android:background="@color/colorPrimary"
+        android:background="@null"
+        android:src="@drawable/goshopping"
         android:text="Go Shopping"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="18sp"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logOutButton"
-        android:layout_marginTop="-94dp"
-        app:layout_constraintHorizontal_bias="0.466" />
+        tools:layout_editor_absoluteY="75dp" />
 
-    <Button
+    <ImageButton
         android:id="@+id/sellButton"
         android:layout_width="375dp"
         android:layout_height="200dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintTop_toBottomOf="@id/buyButton"
+        android:layout_marginTop="28dp"
         android:text="My Pop Up Shop"
         android:textColor="@color/white"
+        android:textSize="18sp"
+        android:src="@drawable/buy"
+        android:background="@null"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:textSize="18sp"
-        android:layout_marginTop="34dp"
-        app:layout_constraintHorizontal_bias="0.466" />
+        app:layout_constraintTop_toBottomOf="@id/buyButton" />
 </android.support.constraint.ConstraintLayout>

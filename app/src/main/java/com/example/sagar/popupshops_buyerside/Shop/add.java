@@ -68,7 +68,7 @@ public class add extends AppCompatActivity {
         final ImageButton imageButton1 = (ImageButton) findViewById(R.id.imageButton1);
         final EditText descriptionInput = (EditText) findViewById(R.id.descriptionInput);
         final EditText priceInput = (EditText) findViewById(R.id.priceInput);
-        final EditText stockInput = (EditText) findViewById(R.id.stockInput);
+        final EditText stockInput = (EditText) findViewById(R.id.itemStockInput);
         final Button attachButton = (Button) findViewById(R.id.attachButton);
         final Button upload = (Button) findViewById(R.id.uploadButton);
 
