@@ -34,7 +34,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -43,7 +45,11 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
 
 public class add extends AppCompatActivity {
 
@@ -66,6 +72,7 @@ public class add extends AppCompatActivity {
         final Button attachButton = (Button) findViewById(R.id.attachButton);
         final Button upload = (Button) findViewById(R.id.uploadButton);
 
+        final DatabaseReference categoryRef = FirebaseUtils.getCategoryRef();
 
         attachButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
@@ -90,7 +97,24 @@ public class add extends AppCompatActivity {
         });
 
         final AutoCompleteTextView categoryInput = (AutoCompleteTextView) findViewById(R.id.categoryInput);
-        categoryInput.setAdapter(suggest(this));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, new String[]{});
+        categoryInput.setAdapter(adapter);
+        categoryInput.setThreshold(1);
+
+        categoryRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                HashMap<String, String> categoryHashMap = (HashMap<String, String>) dataSnapshot.getValue();
+                String[] categoryValues = categoryHashMap.values().toArray(new String[categoryHashMap.size()]);
+                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, categoryValues);
+                categoryInput.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
 
         upload.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
@@ -98,10 +122,10 @@ public class add extends AppCompatActivity {
                 final String priceString = priceInput.getText().toString();
                 final String categoryString = categoryInput.getText().toString();
                 final String stockString = stockInput.getText().toString();
-                final DatabaseReference dbRef = database.getReference("item").push();
+                final DatabaseReference itemRef = FirebaseUtils.getItemRef().push();
 
                 if (priceString.length() != 0 && description.length() != 0 && categoryString.length() != 0 && stockString.length() !=0 && imageUrl != null) {
-                    String itemID = dbRef.getKey();
+                    String itemID = itemRef.getKey();
                     storageRef.child("images/" + itemID + ".png").putFile(imageUrl)
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -111,11 +135,27 @@ public class add extends AppCompatActivity {
                             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                                         @Override
                                                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                                            dbRef.setValue(
+                                                            itemRef.setValue(
                                                                     new Item(
                                                                             categoryString, Float.parseFloat(priceString), description, taskSnapshot.getMetadata().getDownloadUrl().toString(), Integer.parseInt(stockString)
                                                                     )
                                                             );
+
+                                                            categoryRef.runTransaction(new Transaction.Handler() {
+                                                                @Override
+                                                                public Transaction.Result doTransaction(MutableData mutableData) {
+                                                                    HashMap<String, String> hashMap = (HashMap<String,String>) mutableData.getValue();
+                                                                    if (!hashMap.containsValue(categoryString)){
+                                                                        categoryRef.push().setValue(categoryString);
+                                                                    };
+                                                                    return null;
+                                                                }
+
+                                                                @Override
+                                                                public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+
+                                                                }
+                                                            });
                                                             //add shop id to item record
                                                             Query shopIDQuery = FirebaseUtils.getUsersRef().child(FirebaseUtils.getCurrentUser().getUid()).child(FirebaseEndpoint.USERS.SHOPS);
                                                             shopIDQuery.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -125,7 +165,7 @@ public class add extends AppCompatActivity {
                                                                     if (dataSnapshot.exists()) {
                                                                         if (notDone) {
                                                                             String val = dataSnapshot.getValue().toString();
-                                                                            dbRef.child(FirebaseEndpoint.ITEMS.SHOPID).setValue(val.substring(1, val.length() - 1));
+                                                                            itemRef.child(FirebaseEndpoint.ITEMS.SHOPID).setValue(val.substring(1, val.length() - 1));
                                                                             notDone = false;
 
                                                                             Query shopLocationQuery = FirebaseUtils.getShopsRef().child(val.substring(1, val.length() - 1));
@@ -138,7 +178,7 @@ public class add extends AppCompatActivity {
                                                                                         double longitude = (double) dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("longitude").getValue();
                                                                                         DatabaseReference geoRef = FirebaseUtils.getBaseRef().child("item_location");
                                                                                         GeoFire geofire = new GeoFire(geoRef);
-                                                                                        geofire.setLocation(dbRef.getKey(), new GeoLocation(latitude, longitude));
+                                                                                        geofire.setLocation(itemRef.getKey(), new GeoLocation(latitude, longitude));
 
                                                                                     }
                                                                                 }
@@ -227,16 +267,6 @@ public class add extends AppCompatActivity {
             imageButton.setImageURI(imageUrl);
         }
     }
-
-    private ArrayAdapter<String> suggest(Context context) {
-        String[] suggestions = {"General", "Bags", "Books", "back"};
-        String[] addresses = new String[suggestions.length];
-        for (int i = 0; i < suggestions.length; i++) {
-            addresses[i] = suggestions[i];
-        }
-        return new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, addresses);
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

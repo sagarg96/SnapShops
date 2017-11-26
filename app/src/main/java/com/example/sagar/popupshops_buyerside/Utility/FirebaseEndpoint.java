@@ -9,6 +9,7 @@ public class FirebaseEndpoint {
         String ITEM = "item";
         String SHOP_LOCATION = "shops_location";
         String ITEM_LOCATION = "item_location";
+        String CATEGORY = "category";
     }
 
     public interface USERS {
