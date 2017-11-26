@@ -8,21 +8,23 @@ public class Item {
     private String itemImage;
     private int itemStock;
     private String shopID;
+    private String itemID;
 
     public Item() {
 
     }
 
-    public Item(String itemCategory, float itemPrice, String itemDescription, String itemImage, int itemStock) {
+    public Item(String itemCategory, float itemPrice, String itemDescription, String itemImage, int itemStock, String itemID) {
         this.itemCategory = itemCategory;
         this.itemPrice = itemPrice;
         this.itemDescription = itemDescription;
         this.itemImage = itemImage;
         this.itemStock = itemStock;
+        this.itemID=itemID;
     }
 
     public static int getAttributeCount() {
-        return 6;
+        return 7;
     }
 
     public float getItemPrice() {
@@ -47,6 +49,10 @@ public class Item {
 
     public String getShopID() {
         return shopID;
+    }
+
+    public String getItemID() {
+        return itemID;
     }
 
     @Override

@@ -125,7 +125,7 @@ public class add extends AppCompatActivity {
                 final DatabaseReference itemRef = FirebaseUtils.getItemRef().push();
 
                 if (priceString.length() != 0 && description.length() != 0 && categoryString.length() != 0 && stockString.length() !=0 && imageUrl != null) {
-                    String itemID = itemRef.getKey();
+                    final String itemID = itemRef.getKey();
                     storageRef.child("images/" + itemID + ".png").putFile(imageUrl)
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -137,7 +137,7 @@ public class add extends AppCompatActivity {
                                                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                                             itemRef.setValue(
                                                                     new Item(
-                                                                            categoryString, Float.parseFloat(priceString), description, taskSnapshot.getMetadata().getDownloadUrl().toString(), Integer.parseInt(stockString)
+                                                                            categoryString, Float.parseFloat(priceString), description, taskSnapshot.getMetadata().getDownloadUrl().toString(), Integer.parseInt(stockString), itemID
                                                                     )
                                                             );
 
