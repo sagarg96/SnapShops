@@ -153,7 +153,7 @@ public class recycle extends AppCompatActivity {
                             new Item
                                     (
                                             itemSnapshot.child(FirebaseEndpoint.ITEMS.ITEMCATEGORY).getValue().toString(),
-                                            Integer.parseInt(itemSnapshot.child(FirebaseEndpoint.ITEMS.ITEMPRICE).getValue().toString()),
+                                            Float.parseFloat(itemSnapshot.child(FirebaseEndpoint.ITEMS.ITEMPRICE).getValue().toString()),
                                             itemSnapshot.child(FirebaseEndpoint.ITEMS.ITEMDESCRIPTION).getValue().toString(),
                                             itemSnapshot.child(FirebaseEndpoint.ITEMS.ITEMIMAGE).getValue().toString(),
                                             Integer.parseInt(itemSnapshot.child(FirebaseEndpoint.ITEMS.ITEMSTOCK).getValue().toString())

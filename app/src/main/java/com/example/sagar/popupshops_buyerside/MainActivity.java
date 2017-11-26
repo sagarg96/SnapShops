@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -29,9 +30,14 @@ import com.firebase.geofire.GeoQueryEventListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
     private Context mContext;
     private GeoFire geoFire;
     private double radius = 0.5;
+
+    private ArrayList<Item> items = new ArrayList<Item>();
+
+    final DatabaseReference categoryRef = FirebaseUtils.getCategoryRef();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,15 +92,51 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Spinner dropdown = (Spinner) findViewById(R.id.spinner1);
-        String[] items = new String[]{"1", "2", "three"}; //TODO: GET FROM DB
+        final Spinner dropdown = (Spinner) findViewById(R.id.spinner1);
 
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mSwipeView.removeAllViews();
+                for(int i = 0; i < items.size(); i++){
+                    Item item = items.get(i);
+                    String selectedItem = dropdown.getSelectedItem().toString();
+                    if(selectedItem == "All" || (item.getItemCategory() != null && item.getItemCategory().equals(selectedItem))){
+                        mSwipeView.addView(new ItemCard(mContext, item, mSwipeView));
+                    }
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         //create an adapter to describe how the items are displayed, adapters are used in several places in android.
         //There are multiple variations of this, but this is the basic variant.
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, new String[]{});
         //set the spinners adapter to the previously created one.
         dropdown.setAdapter(adapter);
+
+        categoryRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                HashMap<String, String> categoryHashMap = (HashMap<String, String>) dataSnapshot.getValue();
+                ArrayList<String> categories = new ArrayList<String>();
+                categories.add("All");
+                String[] dbCategories = categoryHashMap.values().toArray(new String[categoryHashMap.size()]);
+                for(int i = 0; i<dbCategories.length; i++){
+                    categories.add(dbCategories[i]);
+                }
+                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, categories);
+                dropdown.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
 
         mSwipeView = (SwipePlaceHolderView) findViewById(R.id.swipeView);
         mContext = getApplicationContext();
@@ -126,7 +172,12 @@ public class MainActivity extends AppCompatActivity {
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
                         Item item = dataSnapshot.getValue(Item.class);
-                        mSwipeView.addView(new ItemCard(mContext, item, mSwipeView));
+                        final Spinner dropdown = (Spinner) findViewById(R.id.spinner1);
+                        items.add(item);
+                        String selectedItem = dropdown.getSelectedItem().toString();
+                        if(selectedItem == "All" || (item.getItemCategory() != null && item.getItemCategory().equals(selectedItem))){
+                            mSwipeView.addView(new ItemCard(mContext, item, mSwipeView));
+                        }
                     }
 
                     @Override
