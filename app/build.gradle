@@ -9,6 +9,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -50,6 +51,7 @@ dependencies {
     compile 'com.google.firebase:firebase-storage:10.0.1'
     compile 'com.google.android.gms:play-services-location:10.0.1'
     compile 'com.firebase:geofire-android:2.1.3'
+    compile 'com.google.android.gms:play-services:10.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

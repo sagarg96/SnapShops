@@ -1,4 +1,4 @@
-package com.example.sagar.popupshops_buyerside.Shop;
+package com.example.sagar.popupshops_buyerside.Shop.SellerRecycleView;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,10 +6,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
-import com.bumptech.glide.Glide;
 
 
 import com.example.sagar.popupshops_buyerside.R;
+import com.example.sagar.popupshops_buyerside.Shop.Item;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 import com.google.firebase.database.ChildEventListener;

@@ -25,22 +25,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
-        <activity android:name=".Registration.LoginActivity" android:theme="@style/nobar" />
+        <activity
+            android:name=".Registration.LoginActivity"
+            android:theme="@style/nobar" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Near_me" />
         <activity android:name=".Shop.add" />
-        <activity android:name=".Shop.recycle" />
+        <activity android:name=".Shop.SellerRecycleView.recycle" />
         <activity android:name=".Shop.vendor_dashboard" />
         <!-- <activity android:name=".display" /> -->
 
-        <activity android:name=".Registration.LaunchActivity" android:theme="@style/nobar" >
+        <activity
+            android:name=".Registration.LaunchActivity"
+            android:theme="@style/nobar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Registration.SignupActivity" android:theme="@style/nobar" />
+        <activity
+            android:name=".Registration.SignupActivity"
+            android:theme="@style/nobar" />
         <activity android:name=".SelectActionActivity" />
+        <activity android:name=".MapsActivity" />
+
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -52,5 +61,15 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyAywU0X5cEloTw5t0i0E9tjITHy-AUNL_A"/>
+
+        <activity android:name=".BuyerRecycleView.WishlistRecycle"></activity>
     </application>
+
 </manifest>

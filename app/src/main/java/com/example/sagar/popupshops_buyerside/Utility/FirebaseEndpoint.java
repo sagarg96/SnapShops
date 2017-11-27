@@ -33,5 +33,6 @@ public class FirebaseEndpoint {
         String ITEMSTOCK = "itemStock";
         String SHOPID = "shopID";
         String ITEMDESCRIPTION = "itemDescription";
+        String ITEMID = "itemID";
     }
 }

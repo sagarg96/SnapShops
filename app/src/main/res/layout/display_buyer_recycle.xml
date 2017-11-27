@@ -10,49 +10,38 @@
 
 
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:orientation="vertical"
-        android:padding="10sp">
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/itemImage"
-            android:layout_width="128sp"
-            android:layout_height="128sp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:padding="6sp" />
-
-        <TextView
-            android:id="@+id/itemPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/itemDescr"
-            android:layout_alignLeft="@+id/itemCateg"
-            android:layout_alignStart="@+id/itemCateg"
-            android:textSize="26sp"
-            app:layout_constraintTop_toBottomOf="@+id/itemCateg" />
+            android:layout_marginRight="16dp" />
 
         <TextView
             android:id="@+id/itemDescr"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/deleteButton"
-            android:layout_marginLeft="13dp"
-            android:layout_marginStart="13dp"
-            android:layout_toEndOf="@+id/itemImage"
-            android:layout_toRightOf="@+id/itemImage"
-            android:textSize="18sp" />
-        android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/itemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/itemCateg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/itemStock"
@@ -60,31 +49,17 @@
             android:layout_height="wrap_content" />
 
 
-        <TextView
-            android:id="@+id/itemCateg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/itemImage"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp"
-            android:layout_toEndOf="@+id/itemImage"
-            android:layout_toRightOf="@+id/itemImage"
-            android:textSize="26sp" />
-
-
-        <ImageButton
-            android:id="@+id/deleteButton"
+        <Button
+            android:id="@+id/findShop"
+            android:text="Find Shop!"
             android:layout_width="30sp"
             android:layout_height="30sp"
-            android:layout_alignBottom="@+id/itemImage"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="22dp"
-            android:layout_marginRight="22dp"
-            android:src="@drawable/delete" />
+            android:layout_marginLeft="300sp"
+            android:layout_marginStart="300sp" />
 
 
-    </RelativeLayout>
+
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>
 
