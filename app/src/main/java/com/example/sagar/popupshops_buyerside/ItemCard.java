@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.sagar.popupshops_buyerside.Shop.Item;
-import com.example.sagar.popupshops_buyerside.Shop.recycle;
+import com.example.sagar.popupshops_buyerside.Shop.SellerRecycleView.recycle;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 import com.google.firebase.auth.FirebaseAuth;

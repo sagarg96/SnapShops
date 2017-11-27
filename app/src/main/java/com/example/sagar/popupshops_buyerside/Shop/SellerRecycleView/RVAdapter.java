@@ -1,6 +1,5 @@
-package com.example.sagar.popupshops_buyerside.Shop;
+package com.example.sagar.popupshops_buyerside.Shop.SellerRecycleView;
 
-import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.sagar.popupshops_buyerside.R;
+import com.example.sagar.popupshops_buyerside.Shop.Item;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
         itemViewHolder.itemPrice.setText(String.valueOf(itemList.get(position).getItemPrice()));
         itemViewHolder.itemDescr.setText(itemList.get(position).getItemDescription());
         itemViewHolder.itemCategory.setText(itemList.get(position).getItemCategory());
-       // itemViewHolder.itemImage.setImageURI(Uri.parse(itemList.get(position).getItemImage()));
+        itemViewHolder.itemStock.setText(String.valueOf(itemList.get(position).getItemStock()));
         Glide.with(itemViewHolder.itemImage.getContext()).load(itemList.get(position).getItemImage()).into(itemViewHolder.itemImage);
 
         itemViewHolder.deleteButton.setOnClickListener(new FloatingActionButton.OnClickListener() {
@@ -66,6 +66,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
         TextView itemDescr;
         TextView itemCategory;
         TextView itemPrice;
+        TextView itemStock;
         ImageView itemImage;
         ImageButton deleteButton;
 
@@ -77,6 +78,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
             itemPrice = (TextView) itemView.findViewById(R.id.itemPrice);
             itemImage = (ImageView) itemView.findViewById(R.id.itemImage);
             deleteButton = itemView.findViewById(R.id.deleteButton);
+            itemStock = itemView.findViewById(R.id.itemStock);
         }
     }
 }

@@ -55,6 +55,10 @@ public class Item {
         return itemID;
     }
 
+    public void setShopID(String shopID) {
+        this.shopID = shopID;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
@@ -63,6 +67,8 @@ public class Item {
                 ", itemDescription='" + itemDescription + '\'' +
                 ", itemImage='" + itemImage + '\'' +
                 ", itemStock=" + itemStock +
+                ", shopID='" + shopID + '\'' +
+                ", itemID='" + itemID + '\'' +
                 '}';
     }
 }

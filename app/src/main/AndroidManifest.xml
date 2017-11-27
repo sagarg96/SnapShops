@@ -25,21 +25,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
-        <activity android:name=".Registration.LoginActivity" android:theme="@style/nobar" />
+        <activity
+            android:name=".Registration.LoginActivity"
+            android:theme="@style/nobar" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Near_me" />
         <activity android:name=".Shop.add" />
-        <activity android:name=".Shop.recycle" />
+        <activity android:name=".Shop.SellerRecycleView.recycle" />
         <activity android:name=".Shop.vendor_dashboard" />
         <!-- <activity android:name=".display" /> -->
 
-        <activity android:name=".Registration.LaunchActivity" android:theme="@style/nobar" >
+        <activity
+            android:name=".Registration.LaunchActivity"
+            android:theme="@style/nobar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Registration.SignupActivity" android:theme="@style/nobar" />
+        <activity
+            android:name=".Registration.SignupActivity"
+            android:theme="@style/nobar" />
         <activity android:name=".SelectActionActivity" />
 
         <provider
@@ -52,5 +59,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <activity android:name=".BuyerRecycleView.BuyerRecycle"></activity>
     </application>
+
 </manifest>

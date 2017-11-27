@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.sagar.popupshops_buyerside.BuyerRecycleView.BuyerRecycle;
 import com.example.sagar.popupshops_buyerside.Registration.LaunchActivity;
 import com.example.sagar.popupshops_buyerside.Shop.vendor_dashboard;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
@@ -29,6 +30,7 @@ public class SelectActionActivity extends AppCompatActivity {
 
     ImageButton buyButton;
     ImageButton sellButton;
+    ImageButton wishListButton;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -40,6 +42,7 @@ public class SelectActionActivity extends AppCompatActivity {
 
         buyButton = (ImageButton) findViewById(R.id.buyButton);
         sellButton = (ImageButton) findViewById(R.id.sellButton);
+//        wishListButton = (ImageButton) findViewById(R.id.wishlistbutton);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mAuth = FirebaseAuth.getInstance();
@@ -59,6 +62,14 @@ public class SelectActionActivity extends AppCompatActivity {
                 checkShopExists(FirebaseUtils.getCurrentUser());
             }
         });
+
+//        wishListButton.setOnClickListener(new Button.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), BuyerRecycle.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     private void checkShopExists(FirebaseUser currentUser) {

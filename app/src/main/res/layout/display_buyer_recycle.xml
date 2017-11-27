@@ -34,11 +34,6 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/itemStock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
             android:id="@+id/itemPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -48,14 +43,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/itemStock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-        <ImageButton
-            android:id="@+id/deleteButton"
+
+        <Button
+            android:id="@+id/findShop"
+            android:text="Find Shop!"
             android:layout_width="30sp"
             android:layout_height="30sp"
             android:layout_marginLeft="300sp"
-            android:layout_marginStart="300sp"
-            android:src="@drawable/ic_cancel" />
+            android:layout_marginStart="300sp" />
 
 
 

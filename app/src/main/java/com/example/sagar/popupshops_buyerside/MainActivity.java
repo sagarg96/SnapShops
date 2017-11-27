@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private SwipePlaceHolderView mSwipeView;
     private Context mContext;
     private GeoFire geoFire;
-    private double radius = 0.5;
+    private double radius = 2;
 
     private ArrayList<Item> items = new ArrayList<Item>();
 
