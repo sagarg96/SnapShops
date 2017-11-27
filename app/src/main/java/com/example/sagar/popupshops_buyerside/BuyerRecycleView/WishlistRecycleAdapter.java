@@ -22,12 +22,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class BuyerRecycleAdapter extends RecyclerView.Adapter<BuyerRecycleAdapter.ItemViewHolder> {
+public class WishlistRecycleAdapter extends RecyclerView.Adapter<WishlistRecycleAdapter.ItemViewHolder> {
 
-    private static final String TAG = "BuyerRecycle";
+    private static final String TAG = "WishlistRecycle";
     private List<Item> itemList;
 
-    BuyerRecycleAdapter(List<Item> items) {
+    WishlistRecycleAdapter(List<Item> items) {
         this.itemList = items;
     }
 

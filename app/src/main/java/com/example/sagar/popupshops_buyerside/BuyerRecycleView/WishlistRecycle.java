@@ -19,13 +19,13 @@ import com.google.firebase.database.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuyerRecycle extends AppCompatActivity {
+public class WishlistRecycle extends AppCompatActivity {
 
-    private static final String TAG = "BuyerRecycle";
+    private static final String TAG = "WishlistRecycle";
     private List<Item> items;
     private List<String> itemIds;
     private RecyclerView rv;
-    private BuyerRecycleAdapter buyerRecycleAdapter;
+    private WishlistRecycleAdapter wishlistRecycleAdapter;
     private String shopID;
 
     @Override
@@ -78,8 +78,8 @@ public class BuyerRecycle extends AppCompatActivity {
                         try {
                             itemIds.add(snapshot.getKey());
                             Log.w(TAG, String.valueOf(added));
-                            buyerRecycleAdapter = new BuyerRecycleAdapter(items);
-                            rv.setAdapter(buyerRecycleAdapter);
+                            wishlistRecycleAdapter = new WishlistRecycleAdapter(items);
+                            rv.setAdapter(wishlistRecycleAdapter);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -109,7 +109,7 @@ public class BuyerRecycle extends AppCompatActivity {
                         items.remove(itemIndex);
 
                         // Update the RecyclerView
-                        buyerRecycleAdapter.notifyItemRemoved(itemIndex);
+                        wishlistRecycleAdapter.notifyItemRemoved(itemIndex);
                     } else {
                         Log.w(TAG, "onChildRemoved:unknown_child:" + itemKey);
                     }

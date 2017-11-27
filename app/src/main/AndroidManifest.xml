@@ -59,7 +59,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".BuyerRecycleView.BuyerRecycle"></activity>
+        <activity android:name=".BuyerRecycleView.WishlistRecycle"></activity>
     </application>
 
 </manifest>
