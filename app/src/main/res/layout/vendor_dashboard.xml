@@ -85,7 +85,7 @@
                 android:background="@null"
                 android:text="Add Item"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent" />
 
@@ -93,11 +93,11 @@
                 android:id="@+id/updateLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="18sp"
                 android:background="@null"
                 android:text="Update Location"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent" />
 
@@ -105,11 +105,11 @@
                 android:id="@+id/viewItems"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="18sp"
                 android:background="@null"
                 android:text="View Current Items"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/addItem" />
@@ -118,10 +118,11 @@
                 android:id="@+id/closeShop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="18sp"
                 android:text="Close Shop"
                 android:background="@null"
-
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/viewItems" />

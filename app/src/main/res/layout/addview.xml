@@ -14,7 +14,7 @@
         android:layout_marginTop="23dp"
         android:adjustViewBounds="false"
         android:background="@null"
-        app:srcCompat="@drawable/camera" />
+        app:srcCompat="@drawable/cam" />
 
     <Button
         android:id="@+id/attachButton"
@@ -23,18 +23,24 @@
         android:layout_below="@+id/imageButton1"
         android:layout_centerHorizontal="true"
         android:text="Attach Image"
+        android:background="@null"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@+id/imageButton1" />
 
     <Button
         android:id="@+id/uploadButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@null"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         android:layout_alignEnd="@+id/categoryInput"
         android:layout_alignLeft="@+id/categoryInput"
         android:layout_alignRight="@+id/categoryInput"
         android:layout_alignStart="@+id/categoryInput"
         android:layout_below="@+id/categoryInput"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20sp"
         android:text="upload"
         app:layout_constraintTop_toBottomOf="@+id/categoryInput" />
 
@@ -44,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/attachButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="description"
         android:inputType="textPersonName"
