@@ -36,7 +36,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown" />
+            android:spinnerMode="dropdown"
+            android:text="Update Location"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
     </LinearLayout>
 
     <LinearLayout
