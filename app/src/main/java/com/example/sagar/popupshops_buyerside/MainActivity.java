@@ -193,17 +193,23 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
                         final Item item = dataSnapshot.getValue(Item.class);
                         final Spinner dropdown = (Spinner) findViewById(R.id.spinner1);
-                        Query shopQuery = FirebaseUtils.getShopsRef().child(item.getShopID());
+                        Log.w(TAG, item.getShopID());
+                        Query shopQuery = FirebaseUtils.getShopsRef().orderByKey().equalTo(item.getShopID());
                         shopQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                ShopProfile shop = dataSnapshot.getValue(ShopProfile.class);
-                                if (shop.getShopStatus().name().equals("OPEN")) {
-                                    items.add(item);
-                                    String selectedItem = dropdown.getSelectedItem().toString();
-                                    if (selectedItem == "All" || (item.getItemCategory() != null && item.getItemCategory().equals(selectedItem))) {
-                                        mSwipeView.addView(new ItemCard(mContext, item, mSwipeView));
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    ShopProfile shop = snapshot.getValue(ShopProfile.class);
+                                    Log.w(TAG, snapshot.getChildrenCount() + "");
+                                    Log.w(TAG, "here");
+                                    if (shop.getShopStatus().name().equals("OPEN")) {
+                                        items.add(item);
+                                        String selectedItem = dropdown.getSelectedItem().toString();
+                                        if (selectedItem == "All" || (item.getItemCategory() != null && item.getItemCategory().equals(selectedItem))) {
+                                            mSwipeView.addView(new ItemCard(mContext, item, mSwipeView));
+                                        }
                                     }
+
                                 }
                             }
 

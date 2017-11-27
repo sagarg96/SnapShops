@@ -56,7 +56,7 @@ public class WishlistRecycleAdapter extends RecyclerView.Adapter<WishlistRecycle
 
         itemViewHolder.findShop.setOnClickListener(new Button.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 Log.w("here", "" + itemViewHolder.getAdapterPosition());
                 Log.w(TAG, itemList.get(itemViewHolder.getAdapterPosition()).toString());
                 String shopID = itemList.get(itemViewHolder.getAdapterPosition()).getShopID();
@@ -67,17 +67,20 @@ public class WishlistRecycleAdapter extends RecyclerView.Adapter<WishlistRecycle
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         double latitude = 0;
                         double longitude = 0;
+                        String shopName="";
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Log.w(TAG, "found shop" + snapshot.child(FirebaseEndpoint.SHOPS.LOCATION).toString());
                             latitude = (double) snapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("latitude").getValue();
                             longitude = (double) snapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("longitude").getValue();
+                            shopName = snapshot.child(FirebaseEndpoint.SHOPS.SHOPNAME).getValue().toString();
                         }
 
                         // TODO open MAP API and open shop here using location coordinates
-                        Intent myIntent = new Intent(context, MapsActivity.class);
+                        Intent myIntent = new Intent(view.getContext(), MapsActivity.class);
                         myIntent.putExtra("latitude", latitude);
                         myIntent.putExtra("longitude", longitude);
-                        context.startActivity(myIntent);
+                        myIntent.putExtra("shopName", shopName);
+                        view.getContext().startActivity(myIntent);
                     }
 
                     @Override

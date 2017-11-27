@@ -48,6 +48,8 @@
             android:name=".Registration.SignupActivity"
             android:theme="@style/nobar" />
         <activity android:name=".SelectActionActivity" />
+        <activity android:name=".MapsActivity" />
+
 
         <provider
             android:name="android.support.v4.content.FileProvider"
