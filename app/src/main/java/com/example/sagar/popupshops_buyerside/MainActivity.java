@@ -15,6 +15,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private Context mContext;
     private GeoFire geoFire;
     private double radius = 2;
-
+    private Button setRadius;
     private ArrayList<Item> items = new ArrayList<Item>();
 
     final DatabaseReference categoryRef = FirebaseUtils.getCategoryRef();
@@ -81,6 +82,17 @@ public class MainActivity extends AppCompatActivity {
 
         //button change to tab later
         Button near_me_tab = (Button) findViewById(R.id.near_me_tab);
+        setRadius = (Button) findViewById(R.id.set_radius);
+        final EditText radiusInput = (EditText)findViewById(R.id.radius);
+
+        setRadius.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+              radius = Double.parseDouble(radiusInput.getText().toString());
+              runGeoQuery();
+
+            }
+        });
 
         near_me_tab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -158,7 +170,14 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         setLocationAttributes();
+        runGeoQuery();
 
+    }
+
+    public void runGeoQuery(){
+
+        items.clear();
+        mSwipeView.removeAllViews();
 
         GeoQuery itemLocationQuery = geoFire.queryAtLocation(new GeoLocation(latitude, longitude), radius);
         itemLocationQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
@@ -227,8 +246,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private void setLocationAttributes() {

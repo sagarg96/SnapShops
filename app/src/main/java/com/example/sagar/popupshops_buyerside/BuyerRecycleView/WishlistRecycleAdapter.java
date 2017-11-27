@@ -1,5 +1,7 @@
 package com.example.sagar.popupshops_buyerside.BuyerRecycleView;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.sagar.popupshops_buyerside.MapsActivity;
 import com.example.sagar.popupshops_buyerside.R;
 import com.example.sagar.popupshops_buyerside.Shop.Item;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
@@ -26,8 +29,9 @@ public class WishlistRecycleAdapter extends RecyclerView.Adapter<WishlistRecycle
 
     private static final String TAG = "WishlistRecycle";
     private List<Item> itemList;
+    private Context context;
 
-    WishlistRecycleAdapter(List<Item> items) {
+    WishlistRecycleAdapter(List<Item> items, Context context) {
         this.itemList = items;
     }
 
@@ -61,8 +65,8 @@ public class WishlistRecycleAdapter extends RecyclerView.Adapter<WishlistRecycle
                 shopLocationQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        double latitude;
-                        double longitude;
+                        double latitude = 0;
+                        double longitude = 0;
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Log.w(TAG, "found shop" + snapshot.child(FirebaseEndpoint.SHOPS.LOCATION).toString());
                             latitude = (double) snapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("latitude").getValue();
@@ -70,6 +74,10 @@ public class WishlistRecycleAdapter extends RecyclerView.Adapter<WishlistRecycle
                         }
 
                         // TODO open MAP API and open shop here using location coordinates
+                        Intent myIntent = new Intent(context, MapsActivity.class);
+                        myIntent.putExtra("latitude", latitude);
+                        myIntent.putExtra("longitude", longitude);
+                        context.startActivity(myIntent);
                     }
 
                     @Override

@@ -78,7 +78,7 @@ public class WishlistRecycle extends AppCompatActivity {
                         try {
                             itemIds.add(snapshot.getKey());
                             Log.w(TAG, String.valueOf(added));
-                            wishlistRecycleAdapter = new WishlistRecycleAdapter(items);
+                            wishlistRecycleAdapter = new WishlistRecycleAdapter(items, getApplicationContext());
                             rv.setAdapter(wishlistRecycleAdapter);
                         } catch (Exception e) {
                             e.printStackTrace();
