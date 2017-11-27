@@ -12,6 +12,7 @@ import com.example.sagar.popupshops_buyerside.Shop.Item;
 import com.example.sagar.popupshops_buyerside.Shop.recycle;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -83,6 +84,8 @@ public class ItemCard {
     private void onSwipedOut() {
         Log.d("EVENT", "onSwipedOut");
         //mSwipeView.addView(this);
+        DatabaseReference wishListReference = FirebaseUtils.getWishListRef();
+        wishListReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(mItem.getItemID()).setValue(null);
     }
 
     @SwipeCancelState
@@ -93,6 +96,8 @@ public class ItemCard {
     @SwipeIn
     private void onSwipeIn() {
         Log.d("EVENT", "onSwipedIn");
+        DatabaseReference wishListReference = FirebaseUtils.getWishListRef();
+        wishListReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(mItem.getItemID()).setValue(mItem);
     }
 
     @SwipeInState

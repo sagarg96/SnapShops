@@ -77,6 +77,11 @@ public class FirebaseUtils {
     public static void logoutUser() {
         FirebaseAuth.getInstance().signOut();
     }
+
+    public static DatabaseReference getWishListRef() {
+        return getBaseRef().child("wishList");
+    }
+
     public interface Callback {
         void OnComplete(String value);
     }
