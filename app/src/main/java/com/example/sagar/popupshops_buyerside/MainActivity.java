@@ -84,13 +84,13 @@ public class MainActivity extends AppCompatActivity {
         //button change to tab later
         Button near_me_tab = (Button) findViewById(R.id.near_me_tab);
         setRadius = (Button) findViewById(R.id.set_radius);
-        final EditText radiusInput = (EditText)findViewById(R.id.radius);
+        final EditText radiusInput = (EditText) findViewById(R.id.radius);
 
         setRadius.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-              radius = Double.parseDouble(radiusInput.getText().toString());
-              runGeoQuery();
+                radius = Double.parseDouble(radiusInput.getText().toString());
+                runGeoQuery();
 
             }
         });
@@ -111,10 +111,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mSwipeView.removeAllViews();
-                for(int i = 0; i < items.size(); i++){
+                for (int i = 0; i < items.size(); i++) {
                     Item item = items.get(i);
                     String selectedItem = dropdown.getSelectedItem().toString();
-                    if(selectedItem == "All" || (item.getItemCategory() != null && item.getItemCategory().equals(selectedItem))){
+                    if (selectedItem == "All" || (item.getItemCategory() != null && item.getItemCategory().equals(selectedItem))) {
                         mSwipeView.addView(new ItemCard(mContext, item, mSwipeView));
                     }
                 }
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> categories = new ArrayList<String>();
                 categories.add("All");
                 String[] dbCategories = categoryHashMap.values().toArray(new String[categoryHashMap.size()]);
-                for(int i = 0; i<dbCategories.length; i++){
+                for (int i = 0; i < dbCategories.length; i++) {
                     categories.add(dbCategories[i]);
                 }
                 final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, categories);
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void runGeoQuery(){
+    public void runGeoQuery() {
 
         items.clear();
         mSwipeView.removeAllViews();
@@ -198,14 +198,15 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 ShopProfile shop = dataSnapshot.getValue(ShopProfile.class);
-                                if(shop.getShopStatus().name().equals("OPEN")){
+                                if (shop.getShopStatus().name().equals("OPEN")) {
                                     items.add(item);
                                     String selectedItem = dropdown.getSelectedItem().toString();
-                                    if(selectedItem == "All" || (item.getItemCategory() != null && item.getItemCategory().equals(selectedItem))){
+                                    if (selectedItem == "All" || (item.getItemCategory() != null && item.getItemCategory().equals(selectedItem))) {
                                         mSwipeView.addView(new ItemCard(mContext, item, mSwipeView));
                                     }
                                 }
                             }
+
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
 
