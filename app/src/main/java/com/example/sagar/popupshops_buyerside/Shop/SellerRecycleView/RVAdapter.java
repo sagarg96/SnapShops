@@ -50,7 +50,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
             public void onClick(View view) {
                 Log.w("here", "" + itemViewHolder.getAdapterPosition());
                 FirebaseUtils.getItemRef().child(itemList.get(itemViewHolder.getAdapterPosition()).getItemID()).setValue(null);
-
+                //TODO remove its item location reference also when you delete an item!
+                //TODO remove wishlist reference when you delete an item!
             }
         });
     }

@@ -105,9 +105,11 @@ public class add extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 HashMap<String, String> categoryHashMap = (HashMap<String, String>) dataSnapshot.getValue();
-                String[] categoryValues = categoryHashMap.values().toArray(new String[categoryHashMap.size()]);
-                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, categoryValues);
-                categoryInput.setAdapter(adapter);
+                if(categoryHashMap != null){
+                    String[] categoryValues = categoryHashMap.values().toArray(new String[categoryHashMap.size()]);
+                    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, categoryValues);
+                    categoryInput.setAdapter(adapter);
+                }
             }
 
             @Override
@@ -145,7 +147,7 @@ public class add extends AppCompatActivity {
                                                                 @Override
                                                                 public Transaction.Result doTransaction(MutableData mutableData) {
                                                                     HashMap<String, String> hashMap = (HashMap<String,String>) mutableData.getValue();
-                                                                    if (!hashMap.containsValue(categoryString)){
+                                                                    if (hashMap == null ||  !hashMap.containsValue(categoryString) ){
                                                                         categoryRef.push().setValue(categoryString);
                                                                     };
                                                                     return null;
@@ -174,8 +176,8 @@ public class add extends AppCompatActivity {
                                                                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                                                                     if (dataSnapshot.hasChild(FirebaseEndpoint.SHOPS.LOCATION)) {
                                                                                         Log.w(TAG, dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).getValue().toString());
-                                                                                        double latitude = (double) dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("latitude").getValue();
-                                                                                        double longitude = (double) dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("longitude").getValue();
+                                                                                        double latitude = Double.parseDouble(dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("latitude").getValue().toString());
+                                                                                        double longitude = Double.parseDouble(dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("longitude").getValue().toString());
                                                                                         DatabaseReference geoRef = FirebaseUtils.getBaseRef().child("item_location");
                                                                                         GeoFire geofire = new GeoFire(geoRef);
                                                                                         geofire.setLocation(itemRef.getKey(), new GeoLocation(latitude, longitude));
