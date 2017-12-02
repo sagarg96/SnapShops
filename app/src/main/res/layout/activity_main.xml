@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="80dp"
         android:layout_gravity="bottom"
-        android:gravity="left"
+        android:gravity="start|left"
         android:orientation="horizontal">
 
         <Spinner
@@ -40,29 +40,21 @@
             android:text="Update Location"
             android:textColor="@color/black"
             android:textSize="16sp"/>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:gravity="right"
-        android:orientation="horizontal">
-
-    <EditText
-        android:id="@+id/radius"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Radius"
-        android:inputType="phone" />
+        <EditText
+            android:id="@+id/radius"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Radius"
+            android:inputType="phone" />
 
         <Button
             android:id="@+id/set_radius"
             android:layout_width="wrap_content"
+            android:hint="Set"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
-
 
     <com.mindorks.placeholderview.SwipePlaceHolderView
         android:id="@+id/swipeView"

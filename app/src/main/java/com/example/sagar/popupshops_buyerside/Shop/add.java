@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.sagar.popupshops_buyerside.R;
 import com.example.sagar.popupshops_buyerside.Registration.LaunchActivity;
 import com.example.sagar.popupshops_buyerside.SelectActionActivity;
@@ -174,8 +175,8 @@ public class add extends AppCompatActivity {
                                                                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                                                                     if (dataSnapshot.hasChild(FirebaseEndpoint.SHOPS.LOCATION)) {
                                                                                         Log.w(TAG, dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).getValue().toString());
-                                                                                        double latitude = (double) dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("latitude").getValue();
-                                                                                        double longitude = (double) dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("longitude").getValue();
+                                                                                        double latitude = Double.parseDouble(dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("latitude").getValue().toString());
+                                                                                        double longitude = Double.parseDouble(dataSnapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("longitude").getValue().toString());
                                                                                         DatabaseReference geoRef = FirebaseUtils.getBaseRef().child("item_location");
                                                                                         GeoFire geofire = new GeoFire(geoRef);
                                                                                         geofire.setLocation(itemRef.getKey(), new GeoLocation(latitude, longitude));
@@ -264,7 +265,8 @@ public class add extends AppCompatActivity {
             imageUrl = data.getData();
             imageButton.setImageURI(imageUrl);
         } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            imageButton.setImageURI(imageUrl);
+//            imageButton.setImageURI(imageUrl);
+            Glide.with(getApplicationContext()).load(imageUrl).override(350,200).into(imageButton);
         }
     }
 

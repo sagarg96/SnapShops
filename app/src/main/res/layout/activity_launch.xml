@@ -14,11 +14,10 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:src="@drawable/pop_up_shop_logo"
-        app:layout_constraintHorizontal_bias="0.576"
+        android:layout_width="230dp"
+        android:layout_height="147dp"
+        android:layout_marginTop="84dp"
+        android:src="@drawable/snapshoplogo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,7 +29,7 @@
         android:id="@+id/loginButton"
         android:layout_width="175dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="47dp"
+        android:layout_marginBottom="32dp"
         android:background="@null"
         android:text="Login"
         android:textColor="@color/black"
@@ -47,18 +46,34 @@
         android:id="@+id/signupButton"
         android:layout_width="175dp"
         android:layout_height="70dp"
-        android:layout_marginTop="174dp"
+        android:layout_marginTop="216dp"
         android:height="@android:dimen/notification_large_icon_height"
         android:background="@null"
         android:text="Sign Up"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        android:text="SELL | SEARCH | SHOP"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
 
 </android.support.constraint.ConstraintLayout>
