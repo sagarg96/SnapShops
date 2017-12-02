@@ -54,7 +54,6 @@ public class ItemCard {
         Glide.with(mContext).load(mItem.getItemImage()).into(profileImageView);
         itemDetail.setText(mItem.getItemDescription() + ", $" + mItem.getItemPrice());
         DatabaseReference shopReference = FirebaseUtils.getShopsRef().child(mItem.getShopID()).child(FirebaseEndpoint.SHOPS.SHOPNAME);
-        Log.w("here", mItem.getShopID());
         shopReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
