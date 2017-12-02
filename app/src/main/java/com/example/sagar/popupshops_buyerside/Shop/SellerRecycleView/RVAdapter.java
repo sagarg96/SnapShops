@@ -15,6 +15,10 @@ import com.bumptech.glide.Glide;
 import com.example.sagar.popupshops_buyerside.R;
 import com.example.sagar.popupshops_buyerside.Shop.Item;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
 
@@ -48,9 +52,42 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
         itemViewHolder.deleteButton.setOnClickListener(new FloatingActionButton.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final String itemID = itemList.get(itemViewHolder.getAdapterPosition()).getItemID();
                 Log.w("here", "" + itemViewHolder.getAdapterPosition());
-                FirebaseUtils.getItemRef().child(itemList.get(itemViewHolder.getAdapterPosition()).getItemID()).setValue(null);
+                FirebaseUtils.getItemRef().child(itemID).setValue(null);
+                FirebaseUtils.getItemLocationRef().child(itemID).setValue(null);
+                final DatabaseReference wishListRef = FirebaseUtils.getWishListRef();
+                wishListRef.addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        for(DataSnapshot ds : dataSnapshot.getChildren()){
+                            Item item = ds.getValue(Item.class);
+                            if(item.getItemID().equals(itemID)){
+                                wishListRef.child(dataSnapshot.getKey()).child(ds.getKey()).setValue(null);
+                            }
+                        }
+                    }
 
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
     }
