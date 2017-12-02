@@ -142,9 +142,11 @@ public class MainActivity extends AppCompatActivity {
                 HashMap<String, String> categoryHashMap = (HashMap<String, String>) dataSnapshot.getValue();
                 ArrayList<String> categories = new ArrayList<String>();
                 categories.add("All");
-                String[] dbCategories = categoryHashMap.values().toArray(new String[categoryHashMap.size()]);
-                for (int i = 0; i < dbCategories.length; i++) {
-                    categories.add(dbCategories[i]);
+                if (categoryHashMap != null) {
+                    String[] dbCategories = categoryHashMap.values().toArray(new String[categoryHashMap.size()]);
+                    for (int i = 0; i < dbCategories.length; i++) {
+                        categories.add(dbCategories[i]);
+                    }
                 }
                 final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, categories);
                 dropdown.setAdapter(adapter);
