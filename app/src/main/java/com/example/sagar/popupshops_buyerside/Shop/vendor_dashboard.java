@@ -289,7 +289,7 @@ public class vendor_dashboard extends AppCompatActivity {
 
             // \n is for new line
             Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
-                    + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+                    + latitude + "\nLong: " + longitude, Toast.LENGTH_SHORT).show();
         } else {
             // can't get location
             // GPS or Network is not enabled
@@ -334,17 +334,6 @@ public class vendor_dashboard extends AppCompatActivity {
             }
         });
     }
-
-//    private class updateTextFields extends AsyncTask<Void, Void, HashMap<String, String>> {
-//
-//        @Override
-//        protected HashMap<String, String> doInBackground(Void... voids) {
-//            HashMap<String,String> map = new HashMap<>();
-//            map.put()
-//            return null;
-//        }
-//    }
-
 
     private void createShop(String shopName, String shopDescription) {
         //create shop in shop table
@@ -403,7 +392,7 @@ public class vendor_dashboard extends AppCompatActivity {
             final String the_text = input_text.getText().toString();
 
             if (KeyCode == KeyEvent.KEYCODE_ENTER) {
-                Toast.makeText(vendor_dashboard.this, "Description Updated " + the_text, Toast.LENGTH_LONG).show();
+                Toast.makeText(vendor_dashboard.this, "Description Updated " + the_text, Toast.LENGTH_SHORT).show();
                 //press enter to update shop description
 
                 Query shopExistQuery = FirebaseUtils.getUsersRef().child(FirebaseUtils.getCurrentUser().getUid()).child(FirebaseEndpoint.USERS.SHOPS);
@@ -448,7 +437,7 @@ public class vendor_dashboard extends AppCompatActivity {
             final String the_text = input_text.getText().toString();
 
             if (KeyCode == KeyEvent.KEYCODE_ENTER) {
-                Toast.makeText(vendor_dashboard.this, "Shop Name Updated " + the_text, Toast.LENGTH_LONG).show();
+                Toast.makeText(vendor_dashboard.this, "Shop Name Updated " + the_text, Toast.LENGTH_SHORT).show();
                 Query shopExistQuery = FirebaseUtils.getUsersRef().child(FirebaseUtils.getCurrentUser().getUid()).child(FirebaseEndpoint.USERS.SHOPS);
                 shopExistQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

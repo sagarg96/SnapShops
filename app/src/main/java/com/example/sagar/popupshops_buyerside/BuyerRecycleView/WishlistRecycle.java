@@ -1,19 +1,29 @@
 package com.example.sagar.popupshops_buyerside.BuyerRecycleView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.sagar.popupshops_buyerside.R;
+import com.example.sagar.popupshops_buyerside.Registration.LaunchActivity;
+import com.example.sagar.popupshops_buyerside.SelectActionActivity;
 import com.example.sagar.popupshops_buyerside.Shop.Item;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseEndpoint;
 import com.example.sagar.popupshops_buyerside.Utility.FirebaseUtils;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
@@ -26,7 +36,7 @@ public class WishlistRecycle extends AppCompatActivity {
     private List<String> itemIds;
     private RecyclerView rv;
     private WishlistRecycleAdapter wishlistRecycleAdapter;
-    private String shopID;
+    private Button clearList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +47,30 @@ public class WishlistRecycle extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
         rv.setHasFixedSize(true);
+
+        clearList = (Button) findViewById(R.id.clearList);
+        clearList.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(WishlistRecycle.this);
+                builder.setMessage("Are you sure you want to clear your wishlist?")
+                        .setPositiveButton("Yes!", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                DatabaseReference wishList = FirebaseUtils.getWishListRef().child(FirebaseUtils.getCurrentUser().getUid());
+                                wishList.setValue(null);
+                            }
+                        })
+                        .setNegativeButton("Nah", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //do Nothing
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
 
         initializeData();
 
@@ -53,7 +87,6 @@ public class WishlistRecycle extends AppCompatActivity {
     }
 
     public void addItemsToView() {
-        //TODO remove child event listener on app stop
 
         final Query itemQuery = FirebaseUtils.getWishListRef().orderByKey().equalTo(FirebaseUtils.getCurrentUser().getUid());
         itemQuery.addChildEventListener(new ChildEventListener() {
@@ -99,7 +132,7 @@ public class WishlistRecycle extends AppCompatActivity {
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 Log.d(TAG, "onChildRemoved:" + dataSnapshot.getKey());
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String itemKey = snapshot.getKey();
 
                     int itemIndex = itemIds.indexOf(itemKey);
@@ -132,6 +165,33 @@ public class WishlistRecycle extends AppCompatActivity {
 
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            Intent intent = new Intent(getApplicationContext(), SelectActionActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.action_settings2) {
+            FirebaseUtils.logoutUser();
+            Intent intent = new Intent(getApplicationContext(), LaunchActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

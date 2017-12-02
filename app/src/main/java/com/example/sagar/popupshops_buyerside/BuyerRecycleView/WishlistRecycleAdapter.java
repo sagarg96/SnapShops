@@ -70,8 +70,8 @@ public class WishlistRecycleAdapter extends RecyclerView.Adapter<WishlistRecycle
                         String shopName="";
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Log.w(TAG, "found shop" + snapshot.child(FirebaseEndpoint.SHOPS.LOCATION).toString());
-                            latitude = (double) snapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("latitude").getValue();
-                            longitude = (double) snapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("longitude").getValue();
+                            latitude = Double.parseDouble(snapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("latitude").getValue().toString());
+                            longitude = Double.parseDouble(snapshot.child(FirebaseEndpoint.SHOPS.LOCATION).child("longitude").getValue().toString());
                             shopName = snapshot.child(FirebaseEndpoint.SHOPS.SHOPNAME).getValue().toString();
                         }
 

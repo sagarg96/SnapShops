@@ -40,6 +40,7 @@ import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -88,9 +89,13 @@ public class MainActivity extends AppCompatActivity {
 
         setRadius.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if (!radiusInput.getText().toString().equals("")){
+                    radius = Double.parseDouble(radiusInput.getText().toString());
+                    runGeoQuery();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Please enter a value in the radius field. The default is 2km.",Toast.LENGTH_SHORT).show();
+                }
 
-                radius = Double.parseDouble(radiusInput.getText().toString());
-                runGeoQuery();
 
             }
         });
