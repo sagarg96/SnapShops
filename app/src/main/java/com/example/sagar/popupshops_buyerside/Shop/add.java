@@ -1,7 +1,7 @@
 package com.example.sagar.popupshops_buyerside.Shop;
 
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -46,11 +47,8 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class add extends AppCompatActivity {
 
@@ -106,7 +104,7 @@ public class add extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 HashMap<String, String> categoryHashMap = (HashMap<String, String>) dataSnapshot.getValue();
-                if(categoryHashMap != null){
+                if (categoryHashMap != null) {
                     String[] categoryValues = categoryHashMap.values().toArray(new String[categoryHashMap.size()]);
                     final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, categoryValues);
                     categoryInput.setAdapter(adapter);
@@ -119,6 +117,33 @@ public class add extends AppCompatActivity {
             }
         });
 
+        descriptionInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        priceInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        stockInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
         upload.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 final String description = descriptionInput.getText().toString();
@@ -127,7 +152,7 @@ public class add extends AppCompatActivity {
                 final String stockString = stockInput.getText().toString();
                 final DatabaseReference itemRef = FirebaseUtils.getItemRef().push();
 
-                if (priceString.length() != 0 && description.length() != 0 && categoryString.length() != 0 && stockString.length() !=0 && imageUrl != null) {
+                if (priceString.length() != 0 && description.length() != 0 && categoryString.length() != 0 && stockString.length() != 0 && imageUrl != null) {
                     final String itemID = itemRef.getKey();
                     storageRef.child("images/" + itemID + ".png").putFile(imageUrl)
                             .addOnFailureListener(new OnFailureListener() {
@@ -147,10 +172,11 @@ public class add extends AppCompatActivity {
                                                             categoryRef.runTransaction(new Transaction.Handler() {
                                                                 @Override
                                                                 public Transaction.Result doTransaction(MutableData mutableData) {
-                                                                    HashMap<String, String> hashMap = (HashMap<String,String>) mutableData.getValue();
-                                                                    if (hashMap == null ||  !hashMap.containsValue(categoryString) ){
+                                                                    HashMap<String, String> hashMap = (HashMap<String, String>) mutableData.getValue();
+                                                                    if (hashMap == null || !hashMap.containsValue(categoryString)) {
                                                                         categoryRef.push().setValue(categoryString);
-                                                                    };
+                                                                    }
+                                                                    ;
                                                                     return null;
                                                                 }
 
@@ -210,8 +236,7 @@ public class add extends AppCompatActivity {
                                                         }
                                                     }
                     );
-                }
-                else {
+                } else {
                     Toast.makeText(add.this, "Please input all fields and attach an image", Toast.LENGTH_LONG).show();
                 }
 
@@ -268,8 +293,13 @@ public class add extends AppCompatActivity {
             imageButton.setImageURI(imageUrl);
         } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 //            imageButton.setImageURI(imageUrl);
-            Glide.with(getApplicationContext()).load(imageUrl).override(350,200).into(imageButton);
+            Glide.with(getApplicationContext()).load(imageUrl).override(350, 200).into(imageButton);
         }
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override

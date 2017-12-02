@@ -48,7 +48,7 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.display2, viewGroup, false);
                 return new ItemViewHolderWithoutDelete(v);
             }
-            default:{
+            default: {
                 View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.display, viewGroup, false);
                 return new ItemViewHolder(v);
             }
@@ -60,31 +60,52 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int position) {
         switch (viewHolder.getItemViewType()) {
             case 0: {
-                ItemViewHolder itemViewHolder = (ItemViewHolder) viewHolder;
+                final ItemViewHolder itemViewHolder = (ItemViewHolder) viewHolder;
                 itemViewHolder.itemPrice.setText(String.valueOf(itemList.get(position).getItemPrice()));
                 itemViewHolder.itemDescr.setText(itemList.get(position).getItemDescription());
                 itemViewHolder.itemCategory.setText(itemList.get(position).getItemCategory());
                 itemViewHolder.itemStock.setText(String.valueOf(itemList.get(position).getItemStock()));
                 Glide.with(itemViewHolder.itemImage.getContext()).load(itemList.get(position).getItemImage()).into(itemViewHolder.itemImage);
 
-        itemViewHolder.deleteButton.setOnClickListener(new FloatingActionButton.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String itemID = itemList.get(itemViewHolder.getAdapterPosition()).getItemID();
-                Log.w("here", "" + itemViewHolder.getAdapterPosition());
-                FirebaseUtils.getItemRef().child(itemID).setValue(null);
-                FirebaseUtils.getItemLocationRef().child(itemID).setValue(null);
-                final DatabaseReference wishListRef = FirebaseUtils.getWishListRef();
-                wishListRef.addChildEventListener(new ChildEventListener() {
+                itemViewHolder.deleteButton.setOnClickListener(new FloatingActionButton.OnClickListener() {
                     @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        for(DataSnapshot ds : dataSnapshot.getChildren()){
-                            Item item = ds.getValue(Item.class);
-                            if(item.getItemID().equals(itemID)){
-                                wishListRef.child(dataSnapshot.getKey()).child(ds.getKey()).setValue(null);
+                    public void onClick(View view) {
+                        final String itemID = itemList.get(itemViewHolder.getAdapterPosition()).getItemID();
+                        Log.w("here", "" + itemViewHolder.getAdapterPosition());
+                        FirebaseUtils.getItemRef().child(itemID).setValue(null);
+                        FirebaseUtils.getItemLocationRef().child(itemID).setValue(null);
+                        final DatabaseReference wishListRef = FirebaseUtils.getWishListRef();
+                        wishListRef.addChildEventListener(new ChildEventListener() {
+                            @Override
+                            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                    Item item = ds.getValue(Item.class);
+                                    if (item.getItemID().equals(itemID)) {
+                                        wishListRef.child(dataSnapshot.getKey()).child(ds.getKey()).setValue(null);
+                                    }
+                                }
                             }
-                        }
-                    }
+
+                            @Override
+                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                            }
+
+                            @Override
+                            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                            }
+
+                            @Override
+                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
 
                     }
                 });
@@ -103,29 +124,8 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
 
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-            }
-        });
     }
+
 
     @Override
     public int getItemCount() {
