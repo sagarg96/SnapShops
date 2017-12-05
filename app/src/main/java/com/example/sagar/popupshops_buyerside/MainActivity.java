@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //button change to tab later
-        Button near_me_tab = (Button) findViewById(R.id.near_me_tab);
+        //Button near_me_tab = (Button) findViewById(R.id.near_me_tab);
         setRadius = (Button) findViewById(R.id.set_radius);
         final EditText radiusInput = (EditText) findViewById(R.id.radius);
 
@@ -100,15 +100,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        near_me_tab.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                showAlertbox("Yolo");
-//                Intent myIntent = new Intent(MainActivity.this, Near_me.class);
-//                MainActivity.this.startActivity(myIntent);
-
-            }
-        });
+//        near_me_tab.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//
+//                showAlertbox("Yolo");
+////                Intent myIntent = new Intent(MainActivity.this, Near_me.class);
+////                MainActivity.this.startActivity(myIntent);
+//
+//            }
+//        });
 
         final Spinner dropdown = (Spinner) findViewById(R.id.spinner1);
 
