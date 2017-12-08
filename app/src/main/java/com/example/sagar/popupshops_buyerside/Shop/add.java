@@ -290,9 +290,8 @@ public class add extends AppCompatActivity {
         ImageButton imageButton = (ImageButton) findViewById(R.id.imageButton1);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
             imageUrl = data.getData();
-            imageButton.setImageURI(imageUrl);
+            Glide.with(getApplicationContext()).load(imageUrl).override(350, 200).into(imageButton);
         } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-//            imageButton.setImageURI(imageUrl);
             Glide.with(getApplicationContext()).load(imageUrl).override(350, 200).into(imageButton);
         }
     }
