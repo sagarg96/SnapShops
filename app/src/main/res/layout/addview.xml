@@ -1,102 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <ImageButton
-        android:id="@+id/imageButton1"
-        style="@android:style/Widget.Holo.ImageButton"
-        android:layout_width="350sp"
-        android:layout_height="200sp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp"
-        android:adjustViewBounds="false"
-        android:background="@null"
-        app:srcCompat="@drawable/cam" />
-
-    <Button
-        android:id="@+id/attachButton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageButton1"
-        android:layout_centerHorizontal="true"
-        android:text="Attach Image"
-        android:background="@null"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton1" />
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/uploadButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:layout_alignEnd="@+id/categoryInput"
-        android:layout_alignLeft="@+id/categoryInput"
-        android:layout_alignRight="@+id/categoryInput"
-        android:layout_alignStart="@+id/categoryInput"
-        android:layout_below="@+id/categoryInput"
-        android:layout_marginTop="20sp"
-        android:text="upload"
-        app:layout_constraintTop_toBottomOf="@+id/categoryInput" />
+        <ImageButton
+            android:id="@+id/imageButton1"
+            style="@android:style/Widget.Holo.ImageButton"
+            android:layout_width="350sp"
+            android:layout_height="200sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="23dp"
+            android:adjustViewBounds="false"
+            android:background="@null"
+            app:srcCompat="@drawable/cam" />
 
-    <EditText
-        android:id="@+id/descriptionInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/attachButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="description"
-        android:inputType="textPersonName"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/attachButton" />
+        <Button
+            android:id="@+id/attachButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageButton1"
+            android:layout_centerHorizontal="true"
+            android:text="Attach Image"
+            android:background="@null"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/imageButton1" />
 
-    <EditText
-        android:id="@+id/priceInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/descriptionInput"
-        android:layout_alignStart="@+id/descriptionInput"
-        android:layout_below="@+id/descriptionInput"
-        android:layout_marginTop="17dp"
-        android:ems="10"
-        android:hint="price"
-        android:inputType="numberDecimal"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionInput" />
+        <EditText
+            android:id="@+id/descriptionInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/attachButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:hint="description"
+            android:inputType="textPersonName"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/attachButton" />
 
-    <EditText
-        android:id="@+id/itemStockInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/priceInput"
-        android:layout_alignStart="@+id/priceInput"
-        android:layout_below="@+id/priceInput"
-        android:layout_marginTop="17dp"
-        android:ems="10"
-        android:hint="stock"
-        android:inputType="phone"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priceInput" />
+        <EditText
+            android:id="@+id/priceInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/descriptionInput"
+            android:layout_alignStart="@+id/descriptionInput"
+            android:layout_below="@+id/descriptionInput"
+            android:layout_marginTop="17dp"
+            android:ems="10"
+            android:hint="price"
+            android:inputType="numberDecimal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionInput" />
 
-    <AutoCompleteTextView
-        android:id="@+id/categoryInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/itemStockInput"
-        android:layout_alignStart="@+id/itemStockInput"
-        android:layout_below="@+id/itemStockInput"
-        android:layout_marginTop="17dp"
-        android:ems="10"
-        android:hint="category"
-        android:maxLength="25"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemStockInput" />
+        <EditText
+            android:id="@+id/itemStockInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/priceInput"
+            android:layout_alignStart="@+id/priceInput"
+            android:layout_below="@+id/priceInput"
+            android:layout_marginTop="17dp"
+            android:ems="10"
+            android:hint="stock"
+            android:inputType="phone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceInput" />
 
-</RelativeLayout>
+        <AutoCompleteTextView
+            android:id="@+id/categoryInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/itemStockInput"
+            android:layout_alignStart="@+id/itemStockInput"
+            android:layout_below="@+id/itemStockInput"
+            android:layout_marginTop="17dp"
+            android:ems="10"
+            android:hint="category"
+            android:maxLength="25"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemStockInput" />
+
+        <Button
+            android:id="@+id/uploadButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/categoryInput"
+            android:layout_alignLeft="@+id/categoryInput"
+            android:layout_alignRight="@+id/categoryInput"
+            android:layout_alignStart="@+id/categoryInput"
+            android:layout_below="@+id/categoryInput"
+            android:layout_marginTop="20sp"
+            android:background="@null"
+            android:text="upload"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@+id/categoryInput" />
+
+    </LinearLayout>
+</ScrollView>
